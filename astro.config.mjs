@@ -6,8 +6,8 @@ import solidJs from "@astrojs/solid-js"
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://astro-sphere-demo.vercel.app",
+  site: "https://ansh-b.github.io",
   integrations: [mdx(), sitemap(), solidJs(), tailwind({ applyBaseStyles: false })],
-  base: "/ansh", site: "https://ansh-b.github.io"
+  base: "/ansh"
 
 })
