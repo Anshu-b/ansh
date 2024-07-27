@@ -62,10 +62,10 @@ The links that are displayed in the header and drawer
 
 ```js
 export const LINKS: Links = [
-  { HREF: "/", TEXT: "Home" },
-  { HREF: "/work", TEXT: "Work" },
-  { HREF: "/blog", TEXT: "Blog" },
-  { HREF: "/projects", TEXT: "Projects" },
+  { HREF: "/ansh", TEXT: "Home" },
+  { HREF: "/ansh/work", TEXT: "Work" },
+  { HREF: "/ansh/blog", TEXT: "Blog" },
+  { HREF: "/ansh/projects", TEXT: "Projects" },
 ]
 ```
 
