@@ -49,6 +49,10 @@ export const LINKS: Links = [
     TEXT: "Projects", 
     HREF: "/ansh/projects", 
   },
+  { 
+    TEXT: "HomeForesting", 
+    HREF: "http://anshu-b.github.io/home-foresting/", 
+  },
 ]
 
 // Socials
@@ -56,26 +60,20 @@ export const SOCIALS: Socials = [
   { 
     NAME: "Email",
     ICON: "email", 
-    TEXT: "markhorn.dev@gmail.com",
-    HREF: "mailto:markhorn.dev@gmail.com",
+    TEXT: "anshbhatnagar1612@gmail.com",
+    HREF: "mailto:anshbhatnagar1612@gmail.com",
   },
   { 
     NAME: "Github",
     ICON: "github",
-    TEXT: "markhorn-dev",
-    HREF: "https://github.com/markhorn-dev/astro-sphere"
+    TEXT: "Anshu-b",
+    HREF: "https://github.com/Anshu-b"
   },
   { 
     NAME: "LinkedIn",
     ICON: "linkedin",
-    TEXT: "markhorn-dev",
-    HREF: "https://www.linkedin.com/in/markhorn-dev/",
-  },
-  { 
-    NAME: "Twitter",
-    ICON: "twitter-x",
-    TEXT: "markhorn_dev",
-    HREF: "https://twitter.com/markhorn_dev",
+    TEXT: "Ansh Bhatnagar",
+    HREF: "https://www.linkedin.com/in/ansh-bhatnagar-721286234/",
   },
 ]
 
