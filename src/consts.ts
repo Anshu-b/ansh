@@ -26,10 +26,10 @@ export const PROJECTS: Page = {
 }
 
 // Search Page
-//export const SEARCH: Page = {
-  //TITLE: "Search",
-  //DESCRIPTION: "Search all posts and projects by keyword.",
-//}
+export const SEARCH: Page = {
+  TITLE: "Search",
+  DESCRIPTION: "Search all posts and projects by keyword.",
+}
 
 // Links
 export const LINKS: Links = [
