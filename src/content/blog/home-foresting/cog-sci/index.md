@@ -4,7 +4,6 @@ summary: "A [seperate] blog about my rare-plant growing endeavours"
 date: "September 30, 2024"
 draft: false
 tags:
-- Plants
 - Hobby
 ---
 

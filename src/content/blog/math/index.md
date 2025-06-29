@@ -1,12 +1,12 @@
 ---
-title: "Astro Sphere: Social media links"
+title: "Mathematics"
 summary: "A quick tutorial on how to change, add or remove social media links"
 date: "Mar 11 2024"
-draft: true
+draft: false
 tags:
-- Tutorial
-- Astro
-- Astro Sphere
+- Statistics
+- Linear Algebra
+- Calculus
 ---
 
 Astro Sphere comes preconfigured with social media links for Email, Github, Linked In and Twitter (X), but it's very easy to add more.

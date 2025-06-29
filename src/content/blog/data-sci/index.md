@@ -1,11 +1,11 @@
 ---
 title: "Data Science: Applications & Coursework"
-summary: "Adding a new article (blog post or project) is pretty easy."
+summary: "A multidisciplinary play-house."
 date: "Mar 14 2024"
 draft: false
 tags:
-- Data Science
-- ML
-- AI
+- Machine Learning
+- Artificial Intelligence
+- Statistics
 ---
 ## Data Science
