@@ -4,9 +4,7 @@ summary: "An online space to digitally introduce myself & write about my rare-pl
 date: "August 2024"
 draft: false
 tags:
-- Full-Stack
-- Astro Framework
-- Web Deployment
+- Full-Stack Development
 
 demoUrl: https://anshu-b.github.io/ansh/
 repoUrl: https://github.com/Anshu-b/ansh

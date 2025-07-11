@@ -4,11 +4,9 @@ summary: "AI model to to remove human bias from sentencing & improve COMPAS"
 date: "July 15 2022"
 draft: false
 tags:
-- ML
-- AI
+- Machine Learning
+- Data Analysis
 - Python
-- Pandas
-- Presentations
 
 demoURL: https://docs.google.com/presentation/d/1fg3JQVlARlIz0MsUlO3gpdrQ76BD-Gw2e2R1KZpkpME/edit?usp=sharing&usp=embed_facebook
 ---

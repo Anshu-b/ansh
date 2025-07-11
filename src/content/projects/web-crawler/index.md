@@ -5,7 +5,6 @@ date: "May 2021"
 draft: false
 tags:
 - Java
-- OOP
 
 repoUrl: https://github.com/Anshu-b/web-crawler
 ---

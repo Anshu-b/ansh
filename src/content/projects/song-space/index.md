@@ -4,8 +4,8 @@ summary: "Prototype-version of Spotify"
 date: "Nov 16 2021"
 draft: false
 tags:
-- Full-Stack
-- Flask
+- Full-Stack Development
+- Python
 - Databases
 
 demoUrl: https://songspace-production.up.railway.app/login

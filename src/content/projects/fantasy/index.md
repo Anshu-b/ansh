@@ -4,10 +4,12 @@ summary: "Software to assist with NBA Fantasy Sports"
 date: "December 16 2023"
 draft: false
 tags:
-- Full-Stack
-- API
-- Web-Dev Frameworks
-- Web Deployment
+- Full-Stack Development
+- APIs
+- Python
+- JavaScript
+- Databases
+- SQL
 
 demoUrl: https://fantasy-basketball-assistant-production.up.railway.app/
 ---
