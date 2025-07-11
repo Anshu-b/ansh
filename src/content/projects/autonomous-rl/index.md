@@ -10,7 +10,7 @@ tags:
 
 repoUrl: https://github.com/Anshu-b/Autonomous-RL
 demoUrl: https://anshu-b.github.io/Autonomous-RL/
----
+--- 
 
 - The goal of this project is to train a Reinforcement Learning (RL) Classifier on autonomous vehicles. We used both CARLA and DonkeyCar Simulator to navigate our vehicle. 
 - CARLA provided a complex urban driving environment, while the DonkeyCar simulator will be used for a simpler track-based navigation on multiple tracks, including UCSD's own “Warren Field” circuit. 
