@@ -173,3 +173,12 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
     - The textbook and readings were incredibly detailed and well-chosen, and Professor Fleischer did his best boiling everything down in the limited lecture time, though it just wasn't enough time. Not the professor's fault, the material was just too dense. However, he was very open to discussing concepts after class and in OH.  
     - It was project-based (thankfully), which helped me land an A, but the amount of theory was so intense that if it were exam-heavy I probably would’ve been cooked. I still don’t fully grasp some of the math behind reinforcement learning, but I’ve got the readings downloaded and plan to work through them eventually.  
     - Also kind of funny: for some reason there was a really heavy emphasis on reinforcement learning, even though there’s a separate class for that.
+
+
+- ### COGS 195: Instructional Apprenticeship
+  - **Professor:** Kyle Shannon
+  - **Grade:** P
+  - **Workload:** Low
+  - **When** - Spring 2025
+  - **My Thoughts:**
+    - Tutoring for COGS 9, a fun perspective of being on the teaching side of things in a low-stakes class.
