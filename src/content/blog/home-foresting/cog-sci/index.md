@@ -2,9 +2,9 @@
 title: "Home Foresting"
 summary: "A [seperate] blog about my rare-plant growing endeavours"
 date: "September 30, 2024"
-draft: false
+draft: true
 tags:
-- Hobby
+- Plants
 ---
 
 ## <a href="http://anshu-b.github.io/home-foresting/" target="_blank"> Home Foresting</a>
