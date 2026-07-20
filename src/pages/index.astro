@@ -1,246 +1,377 @@
 ---
-import { getCollection } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
-import ArrowCard from "@components/ArrowCard"
-import StackCard from "@components/StackCard.astro"
 import { SITE, SOCIALS } from "@consts"
-import TwinklingStars from "@components/TwinklingStars.astro"
-import MeteorShower from "@components/MeteorShower.astro"
-
-const posts = (await getCollection("blog"))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0,3)
-
-const projects = (await getCollection("projects"))
-  .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0,3)
-
-const stack = [
-  { 
-    text: "Astro", 
-    icon: "astro", 
-    href: "https://astro.build" 
-  },
-  { 
-    text: "Javascript", 
-    icon: "javascript", 
-    href: "https://www.javascript.com" 
-  },
-  { 
-    text: "Typescript", 
-    icon: "typescript", 
-    href: "https://www.typescriptlang.org" 
-  },
-  { 
-    text: "Tailwind", 
-    icon: "tailwind", 
-    href: "https://tailwindcss.com" 
-  },
-]
 ---
 
-<PageLayout title="Home" description={SITE.DESCRIPTION}>
+<PageLayout title="About" description={SITE.DESCRIPTION} theme="notebook" notebookFile="about.ipynb">
 
-  <!-- Light Mode: Particles -->
-  <div class='absolute inset-0 block dark:hidden'>
-    <div id='particles1' class='fixed inset-0'></div>
-    <div id='particles2' class='fixed inset-0'></div>
-    <div id='particles3' class='fixed inset-0'></div>
-  </div>
+  <div class="nb-page">
 
-  <!-- Dark Theme: Stars -->
-  <div class='absolute inset-0 bg-black hidden dark:block'>
-    <div id='stars1' class='fixed inset-0'></div>
-    <div id='stars2' class='fixed inset-0'></div>
-    <div id='stars3' class='fixed inset-0'></div>
-  </div>
-
-  <!-- Dark Theme: Twinkling Stars / Metors -->
-  <div id="galaxy" class="fixed inset-0">
-    <div class="hidden dark:block">
-      <TwinklingStars/>
-      <MeteorShower/>
+    <!-- Markdown cell: hero header -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-md">
+        <h1>Ansh Bhatnagar</h1>
+        <p><em>data science · cognitive science · math-cs · uc san diego</em></p>
+      </div>
     </div>
-  </div>
 
-  <script is:inline src="/ansh/js/bg.js"></script>
-  
-  <!-- HERO -->
-  <section class="relative h-screen w-full">
-    <div id="planetcont" class='animate absolute inset-0 top-1/4 overflow-hidden'>
-      <div id="crescent" class='absolute top-0 left-1/2 -translate-x-1/2 w-[250vw] min-h-[100vh] aspect-square rounded-full p-[1px] bg-gradient-to-b from-black/25 dark:from-white/75 from-0% to-transparent to-5%'>
-        <div id="planet" class='w-full h-full bg-white dark:bg-black rounded-full p-[1px] overflow-hidden flex justify-center'>
-          <div id="blur" class='w-full h-20 rounded-full bg-neutral-900/25 dark:bg-white/25 blur-3xl'/>
+    <div class="nb-spacer-sm"></div>
+
+    <!-- Code cell 1: initialize -->
+    <div class="nb-cell nb-runnable" data-cell-id="1" id="cell-1">
+      <div class="nb-gutter" id="gutter-1">In&nbsp;[&nbsp;]:</div>
+      <div class="nb-code">
+        <button class="nb-run-btn" aria-label="Run cell">▶</button>
+        <span class="nb-kw">import</span> <span class="nb-mod">ansh_bhatnagar</span> <span class="nb-kw">as</span> <span class="nb-mod">ansh</span><br/>
+        <span class="nb-cm"># load profile</span><br/>
+        ansh.<span class="nb-fn">about</span>()
+      </div>
+    </div>
+
+    <!-- Output 1: profile -->
+    <div class="nb-cell" id="output-1">
+      <div class="nb-gutter nb-gutter-out" id="out-gutter-1">
+        <span id="out-prompt-1">Out[&nbsp;]:</span>
+        <button class="nb-toggle-btn" data-target="out-content-1" aria-label="Toggle output">▶</button>
+      </div>
+      <div class="nb-output nb-hidden" id="out-content-1">
+        <div class="nb-out-dict">
+          <span class="nb-out-punc">{</span><br/>
+          &nbsp;&nbsp;<span class="nb-out-dict-key">'name'</span><span class="nb-out-dict-punc">:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nb-out-dict-str">'Ansh Bhatnagar'</span><span class="nb-out-dict-punc">,</span><br/>
+          &nbsp;&nbsp;<span class="nb-out-dict-key">'role'</span><span class="nb-out-dict-punc">:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nb-out-dict-str">'SDE Intern — Amazon Web Services'</span><span class="nb-out-dict-punc">,</span><br/>
+          &nbsp;&nbsp;<span class="nb-out-dict-key">'org'</span><span class="nb-out-dict-punc">:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nb-out-dict-str">'President @ DS3 · Founder @ AWS Cloud Club · GDG UCSD'</span><span class="nb-out-dict-punc">,</span><br/>
+          &nbsp;&nbsp;<span class="nb-out-dict-key">'hackathon'</span><span class="nb-out-dict-punc">:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nb-out-dict-str">'Director @ DataHacks 2026 (~$100k budget, 400+ students)'</span><span class="nb-out-dict-punc">,</span><br/>
+          &nbsp;&nbsp;<span class="nb-out-dict-key">'studying'</span><span class="nb-out-dict-punc">:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nb-out-dict-str">'Data Science, Cognitive Science, Math-CS @ UCSD'</span><span class="nb-out-dict-punc">,</span><br/>
+          &nbsp;&nbsp;<span class="nb-out-dict-key">'building'</span><span class="nb-out-dict-punc">:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nb-out-dict-str">'things that hold up in production'</span><br/>
+          <span class="nb-out-punc">}</span>
+        </div>
+        <div class="nb-out-stream about-bio">
+          <br/>
+          I like to move fast, take ownership, and build things that actually work — even if that means breaking a few things along the way.
+          I'm not trying to fit into one lane: I want to understand how systems work end-to-end, from the infrastructure to the model to the real-world impact.
         </div>
       </div>
     </div>
-    <div class="animate absolute h-full w-full flex items-center justify-center">
-      <div class='relative w-full h-full flex items-center justify-center'>
-        <div class='p-5 text-center'>
-          <p class='animated text-lg md:text-xl lg:text-2xl font-semibold opacity-75'>
-            Hi, I am ...
-          </p>
-          <p class='animated text-2xl md:text-3xl lg:text-4xl font-bold uppercase text-black dark:text-white'>
-            Ansh Goyal Bhatnagar
-          </p>
-          <p class='animated text-sm md:text-base lg:text-lg opacity-75'>
-            Data Science + Cognitive Science @ UC San Diego.
-          </p>
-          <div id="ctaButtons" class='animated flex flex-wrap gap-4 justify-center mt-5'>
-            <a href='/ansh/blog' class='py-2 px-4 rounded truncate text-xs md:text-sm lg:text-base bg-black dark:bg-white text-white dark:text-black hover:opacity-75 blend'>
-              Read my blog
-            </a>
-            <a href='/ansh/work' class='py-2 px-4 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend'>
-              View my work
-            </a>
-          </div>
+
+    <div class="nb-spacer"></div>
+
+    <!-- Markdown cell: organizations header -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-md"><h2>§ Organizations</h2></div>
+    </div>
+
+    <!-- Code cell 2: organizations -->
+    <div class="nb-cell nb-runnable" data-cell-id="2" id="cell-2">
+      <div class="nb-gutter" id="gutter-2">In&nbsp;[&nbsp;]:</div>
+      <div class="nb-code">
+        <button class="nb-run-btn" aria-label="Run cell">▶</button>
+        ansh.<span class="nb-fn">organizations</span>()
+      </div>
+    </div>
+
+    <!-- Output 2: org list -->
+    <div class="nb-cell" id="output-2">
+      <div class="nb-gutter nb-gutter-out" id="out-gutter-2">
+        <span id="out-prompt-2">Out[&nbsp;]:</span>
+        <button class="nb-toggle-btn" data-target="out-content-2" aria-label="Toggle output">▶</button>
+      </div>
+      <div class="nb-output nb-hidden" id="out-content-2">
+        <table class="nb-out-table">
+          <thead>
+            <tr>
+              <th>organization</th>
+              <th>role</th>
+              <th>description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Data Science Student Society (DS3)</td>
+              <td>President</td>
+              <td>Scaled to 600+ members. Consulting, real-world data science, connecting students with research and industry.</td>
+            </tr>
+            <tr>
+              <td>AWS Cloud Club @ UCSD</td>
+              <td>Founder & Lead</td>
+              <td>Founded and lead an industry-backed student org focused on cloud computing education.</td>
+            </tr>
+            <tr>
+              <td>Google Developer Group (GDG) on Campus</td>
+              <td>Founder & Lead</td>
+              <td>Built UCSD's GDG chapter, bridging students with Google's developer ecosystem.</td>
+            </tr>
+            <tr>
+              <td>DataHacks 2026</td>
+              <td>Director</td>
+              <td>400+ students, ~$100k budget. Judges from Apple, Google, NVIDIA, YCombinator, Microsoft.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="nb-spacer"></div>
+
+    <!-- Markdown cell: experience header -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-md"><h2>§ Experience &amp; Learning</h2></div>
+    </div>
+
+    <!-- Code cell 3: deployments -->
+    <div class="nb-cell nb-runnable" data-cell-id="3" id="cell-3">
+      <div class="nb-gutter" id="gutter-3">In&nbsp;[&nbsp;]:</div>
+      <div class="nb-code">
+        <button class="nb-run-btn" aria-label="Run cell">▶</button>
+        ansh.<span class="nb-fn">deployments</span>()<br/>
+        ansh.<span class="nb-fn">coursework</span>()
+      </div>
+    </div>
+
+    <!-- Output 3: experience + coursework -->
+    <div class="nb-cell" id="output-3">
+      <div class="nb-gutter nb-gutter-out" id="out-gutter-3">
+        <span id="out-prompt-3">Out[&nbsp;]:</span>
+        <button class="nb-toggle-btn" data-target="out-content-3" aria-label="Toggle output">▶</button>
+      </div>
+      <div class="nb-output nb-hidden" id="out-content-3">
+        <div class="nb-out-text"><span class="nb-out-hl">Amazon Web Services</span>&nbsp;&nbsp;&nbsp;<span class="nb-out-green">SDE Intern</span>
+<span class="nb-out-sep">────────────────────────────────────────────────────────────────</span>
+Built an anomaly detection system for EC2 deployments at scale. Designed to operate in
+production, integrate with real systems, and support engineers in high-stakes situations.
+That experience pushed me to think less about "models" and more about systems that hold up.
+
+<span class="nb-out-hl">Coursework that changed how I think:</span>
+<span class="nb-out-blue">CSE 29</span>    Systems Programming — memory, processes, how software actually runs
+<span class="nb-out-blue">DSC 120</span>   Signal Processing — transforms, filtering, structure from raw signals
+<span class="nb-out-blue">DSC 190</span>   IoT &amp; Sensors — end-to-end systems, streaming pipelines, hardware-software
+<span class="nb-out-blue">DSC 80</span>    Pandas, ML practice (140A-B: models to deployment)
+<span class="nb-out-blue">COGS 181</span>  Deep Learning — neural nets, architectures, training
+<span class="nb-out-blue">COGS 150</span>  Large Language Models — transformers, prompting, real applications
+<span class="nb-out-blue">MATH 173A</span> Optimization — gradients, convexity, ML as optimization
+<span class="nb-out-blue">MGT 175</span>   Supply Chain &amp; Operations — scale, tradeoffs, uncertainty</div>
         </div>
       </div>
     </div>
-  </section>
 
-  <div class="relative bg-white dark:bg-black">
-    <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
+    <div class="nb-spacer"></div>
 
-      <!-- About Section -->
-      <section class="animate">
-        <article>
-          <p class='p-5 text-center animated text-lg md:text-xl lg:text-2xl font-semibold opacity-100'>About Me</p>
-          <p>I am an <b><i>eager-to-learn student</i></b>, <b><i>software engineer</i></b>, <b><i>data scientist</i></b>, <b><i>machine learning engineer</i></b>, <b><i>plant enthusiast</i></b> and <b><i>sports fanatic</i></b>.</p>
-          <p>I thrive on challenges and staying ahead of the curve, whether it's diving into projects on image generation models, taking classes on cutting-edge technologies like LLMs, drafting Tyrese Haliburton in the first round of fantasy before the Pacers' finals run, or growing ultra-tropical fruit trees that have no business surviving in my climate.</p>
-          <b><p> While I know how to play by the rules, I find the real joy in pushing boundaries, leading self-driven initiatives, proving people wrong, and redefining what's possible.</p></b>
-          <p>During my young professional career, I:</p>
-          <ul>
-          <li> <p>Worked with the CEO of an envirionmental data science company to develop a machine learning model to score corporate sustainability initiatives.</p></li>
-          <li> <p>Gained experience with website development through my time at UCSD's Data Science Society (DS3), where I am now the Infrastructure Director. </p> </li>
-          <li> <p>Learned what it's like to be in a fast-paced fin-tech startup envirionment with Bumper: Investing for Teens. </p> </li>
-          <li> <p>Worked a recreation & education job for the City of Fremont, getting directly involved with my community as a Sports Jam & Youth Service Corps counselor. </p> </li>
-          <li> <p>And have taken a wide range of courses in data science, mathematics, management, software engineering, & cognitive science. </p> </li>
-          <ul> 
-            <li>DSC 80: Practice & Application of Data Science</li>
-            <li>COGS 118B: Introduction to Unsupervised Learning</li>
-            <li>DSC 30: Data Structures & Algorithms</li>
-            <li>MGT 175: Project Management</li>
-            <li>MATH 183: Statistical Methods</li>
-            <li>CS50: Introduction to Computer Science</li>
-            <li>...and much more!</li>
-          </ul>
-          <p>In the future, I:</p>
-          <ul>
-            <li>Look forward to completing more personal projects & participating in internships or on-campus research to gain practical experience and contribute to large-scale impactful projects.</li>
-            <li>Aim to continue my education after my undergraduate degree through a Masters or PhD program in Machine Learning & Data Science.</li>
-            <li>Want to learn more about cutting-edge innovations in tech, such as quantum computing, through coursework and online research.</li>
-            <li>Will improve my skills in "the others" outside of my career; hoping to learn more about investing, woodworking, and owning my own plant nursery in the future!</li>
-          </ul> 
-        </article>
-      </section>
-
-      <!--
-      Blog Preview Section
-      <section class="animate">
-        <div class="space-y-4">
-          <div class="flex justify-between">
-            <p class="font-semibold text-black dark:text-white">
-              Recent posts
-            </p>
-            <a href="/blog" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-              <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
-                All posts
-              </span>
-            </a>
-          </div>
-          <ul class="space-y-4">
-            {posts.map((post) => (
-              <li>
-                <ArrowCard entry={post} />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-      -->
-
-      <!-- Tech Stack Section -->
-      <section class="animate">
-        <div class="space-y-4">
-          <p class="font-semibold text-black dark:text-white">
-            Website build with
-          </p>
-          <div class="flex flex-wrap items-center gap-2 mt-5">
-            {stack.map(item => (
-              <StackCard 
-                text={item.text}
-                icon={item.icon}
-                href={item.href}
-              />
-            ))}
-          </div>
-          <div>
-            Performing reactivity and statefulness, special guest
-            <a href="https://www.solidjs.com/" target="_blank" class="w-fit group underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-              <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
-                SolidJS
-              </span>
-            </a>
-            <p>Inspired from Astro Framework Template by <a href="https://github.com/markhorn-dev/astro-sphere" target="_blank" class="w-fit group underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-              Markhorn Dev</a></p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 
-      Project Preview Section
-      <section class="animate">
-        <div class="space-y-4">
-          <div class="flex justify-between">
-            <p class="font-semibold text-black dark:text-white">
-              Recent projects
-            </p>
-            <a href="/projects" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-              <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
-                All projects
-              </span>
-            </a>
-          </div>
-          <ul class="space-y-4">
-            {projects.map((project) => (
-              <li>
-                <ArrowCard entry={project} />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-       -->
-
-      <!-- Contact Section -->
-      <section class="animate">
-        <div>
-          <p class="font-semibold text-black dark:text-white">
-            Let's Connect!
-          </p>
-          <p>
-            Reach out to me via email or on social media.
-          </p>
-          <div class="grid grid-cols-4 gap-y-2 mt-4 auto-cols-min">
-            {SOCIALS.map(social => (
-              <div class="col-span-1 flex items-center gap-1">
-                <span class="whitespace-nowrap truncate">
-                  {social.NAME}
-                </span>
-              </div>
-              <div class="col-span-3 truncate">
-                <a href={social.HREF} target="_blank" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-                  <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
-                    {social.TEXT}
-                  </span>
-                </a>
-              </div>
-            ))}
-        </div>
-      </section>
+    <!-- Markdown cell: contact header -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-md"><h2>§ Contact</h2></div>
     </div>
+
+    <!-- Code cell 4: contact -->
+    <div class="nb-cell nb-runnable" data-cell-id="4" id="cell-4">
+      <div class="nb-gutter" id="gutter-4">In&nbsp;[&nbsp;]:</div>
+      <div class="nb-code">
+        <button class="nb-run-btn" aria-label="Run cell">▶</button>
+        ansh.<span class="nb-fn">contact</span>()
+      </div>
+    </div>
+
+    <!-- Output 4: socials + nav -->
+    <div class="nb-cell" id="output-4">
+      <div class="nb-gutter nb-gutter-out" id="out-gutter-4">
+        <span id="out-prompt-4">Out[&nbsp;]:</span>
+        <button class="nb-toggle-btn" data-target="out-content-4" aria-label="Toggle output">▶</button>
+      </div>
+      <div class="nb-output nb-hidden" id="out-content-4">
+        <div class="nb-out-dict">
+          <span class="nb-out-punc">{'{'}</span><br/>
+          {SOCIALS.map((social) => (
+            <div>
+              &nbsp;&nbsp;<a href={social.HREF} target="_blank" rel="noopener noreferrer" class="nb-contact-entry">
+                <span class="nb-out-dict-key">'{social.NAME}'</span>
+                <span class="nb-out-dict-punc">:&nbsp;&nbsp;</span>
+                <span class="nb-out-dict-str">'{social.TEXT}'</span>
+              </a>
+            </div>
+          ))}
+          <span class="nb-out-punc">{'}'}</span>
+        </div>
+        <div class="about-nav-links">
+          <a href="/ansh/blog" class="about-nav-btn">open blog.ipynb →</a>
+          <a href="/ansh/work" class="about-nav-btn about-nav-btn-outline">open work.ipynb →</a>
+          <a href="/ansh/projects" class="about-nav-btn about-nav-btn-outline">open projects.ipynb →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nb-spacer"></div>
+
   </div>
+
 </PageLayout>
+
+<style>
+  /* About output extras */
+  .nb-out-punc { color: #8b949e; }
+
+  .about-bio {
+    margin-top: 0.5rem;
+    color: rgba(201, 209, 217, 0.7);
+    font-family: 'Atkinson', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.75;
+    font-family: inherit;
+    white-space: normal;
+  }
+
+  .nb-contact-entry {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .nb-contact-entry:hover { opacity: 0.75; }
+
+  .about-nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .about-nav-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(63, 185, 80, 0.4);
+    border-radius: 3px;
+    color: #3fb950;
+    background: rgba(63, 185, 80, 0.07);
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .about-nav-btn:hover {
+    background: rgba(63, 185, 80, 0.15);
+    border-color: rgba(63, 185, 80, 0.7);
+  }
+
+  .about-nav-btn-outline {
+    background: transparent;
+    color: #8b949e;
+    border-color: rgba(139, 148, 158, 0.3);
+  }
+
+  .about-nav-btn-outline:hover {
+    background: rgba(139, 148, 158, 0.06);
+    border-color: rgba(139, 148, 158, 0.5);
+    color: #e6edf3;
+  }
+</style>
+
+<script is:inline>
+(function () {
+  var execCount = 0;
+
+  function runCell(cellId) {
+    var cell = document.getElementById('cell-' + cellId);
+    var gutter = document.getElementById('gutter-' + cellId);
+    var outPrompt = document.getElementById('out-prompt-' + cellId);
+    var outContent = document.getElementById('out-content-' + cellId);
+    var outGutter = document.getElementById('out-gutter-' + cellId);
+    var toggleBtn = outGutter ? outGutter.querySelector('.nb-toggle-btn') : null;
+    var kernelDot = document.getElementById('nb-kernel-dot');
+    var kernelStatus = document.getElementById('nb-kernel-status');
+
+    if (!outContent) return Promise.resolve();
+
+    cell && cell.classList.add('nb-running');
+    if (gutter) gutter.innerHTML = 'In\u00A0[*]:';
+    kernelDot && kernelDot.classList.add('busy');
+    if (kernelStatus) kernelStatus.textContent = 'Python 3 | busy';
+
+    return new Promise(function (resolve) {
+      setTimeout(function () {
+        execCount++;
+        if (gutter) gutter.innerHTML = 'In\u00A0[' + execCount + ']:';
+        if (outPrompt) outPrompt.innerHTML = 'Out[' + execCount + ']:';
+
+        outContent.classList.remove('nb-hidden');
+        outContent.classList.remove('nb-collapsed');
+        outContent.classList.add('nb-revealed');
+        outContent.style.animation = 'none';
+        outContent.offsetHeight; // reflow
+        outContent.style.animation = '';
+
+        if (toggleBtn) toggleBtn.textContent = '▼';
+
+        cell && cell.classList.remove('nb-running');
+        kernelDot && kernelDot.classList.remove('busy');
+        if (kernelStatus) kernelStatus.textContent = 'Python 3 | idle';
+
+        resolve();
+      }, 320 + Math.random() * 280);
+    });
+  }
+
+  function resetAll() {
+    execCount = 0;
+    document.querySelectorAll('.nb-output.nb-revealed').forEach(function (el) {
+      el.classList.add('nb-hidden');
+      el.classList.remove('nb-revealed');
+    });
+    // Reset prompts (spans inside out-gutter, not the whole gutter)
+    for (var i = 1; i <= 4; i++) {
+      var p = document.getElementById('out-prompt-' + i);
+      if (p) p.innerHTML = 'Out[\u00A0]:';
+    }
+    document.querySelectorAll('.nb-runnable .nb-gutter').forEach(function (el) {
+      el.innerHTML = 'In\u00A0[\u00A0]:';
+    });
+    document.querySelectorAll('.nb-toggle-btn').forEach(function (btn) {
+      btn.textContent = '▶';
+    });
+  }
+
+  async function runAll() {
+    resetAll();
+    var cells = document.querySelectorAll('.nb-runnable[data-cell-id]');
+    for (var i = 0; i < cells.length; i++) {
+      await runCell(cells[i].dataset.cellId);
+      await new Promise(function (r) { setTimeout(r, 80); });
+    }
+  }
+
+  // Individual run buttons
+  document.querySelectorAll('.nb-run-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var cell = btn.closest('.nb-runnable');
+      if (cell && cell.dataset.cellId) runCell(cell.dataset.cellId);
+    });
+  });
+
+  // Toggle (hide/show) buttons
+  document.querySelectorAll('.nb-toggle-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      var hidden = target.classList.contains('nb-hidden') || target.classList.contains('nb-collapsed');
+      if (hidden) {
+        target.classList.remove('nb-hidden');
+        target.classList.remove('nb-collapsed');
+        target.classList.add('nb-revealed');
+        btn.textContent = '▼';
+      } else {
+        target.classList.remove('nb-revealed');
+        target.classList.add('nb-collapsed');
+        btn.textContent = '▶';
+      }
+    });
+  });
+
+  // Run all button (in toolbar)
+  var runAllBtn = document.getElementById('nb-run-all');
+  if (runAllBtn) runAllBtn.addEventListener('click', runAll);
+
+  // Auto-run on load
+  setTimeout(runAll, 700);
+})();
+</script>

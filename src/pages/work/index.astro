@@ -1,60 +1,488 @@
 ---
-import { getCollection, getEntryBySlug } from "astro:content"
+import { getCollection } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
-import TopLayout from "@layouts/TopLayout.astro"
-import BottomLayout from "@layouts/BottomLayout.astro"
-import { WORK } from "@consts"
+import { WORK, SOCIALS } from "@consts"
+import { SKILLS } from "@data/skills"
+import { experienceEntries, researchEntries, leadershipEntries } from "@data/work"
 
-const courseworkEntry = await getEntryBySlug('coursework', 'coursework');
-const coursework = courseworkEntry?.data?.courses ?? [];
-const collection = await getCollection("work")
-
-collection.sort((a, b) => new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime())
-
-const work = await Promise.all(
-  collection.map(async (item) => {
-    const { Content } = await item.render()
-    return { ...item, Content }
-  })
-)
-
-function formatWorkDate(input: Date | string) {
-  if (typeof input === "string") return input
-
-  const month = input.toLocaleDateString("en-US", {
-    month: "short",
-  })
-
-  const year = new Date(input).getFullYear()
-  return `${month} ${year}`
-}
+const projects = (await getCollection("projects"))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 ---
 
-<PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
-  <TopLayout>
-    <div class="animate page-heading">
-      Curriculum Vitae <a href=https://www.overleaf.com/read/hrfwvpcczrqh#e75fd0>(View Resume here)</a>
+<PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION} theme="notebook" notebookFile="work.ipynb">
+
+  <div class="nb-page">
+
+    <!-- Markdown cell: header -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-md">
+        <h1>Curriculum Vitae</h1>
+        <p>
+          <em>full resume on Overleaf →</em>
+          <a href="https://www.overleaf.com/read/hrfwvpcczrqh#e75fd0" target="_blank" rel="noopener noreferrer" class="cv-resume-link">view PDF</a>
+        </p>
+      </div>
     </div>
-  </TopLayout>
-  <BottomLayout>
-    <ul>
-      { 
-        work.map((entry) => (
-          <li class="animate border-b border-black/10 dark:border-white/25 mt-4 py-8 first-of-type:mt-0 first-of-type:pt-0 last-of-type:border-none">
-            <div class="text-sm uppercase mb-4">
-              {formatWorkDate(entry.data.dateStart)} - {formatWorkDate(entry.data.dateEnd)}
+
+    <div class="nb-spacer-sm"></div>
+
+    <!-- ── CELL 1: social_links ─────────────────────────────────── -->
+    <div class="nb-cell nb-runnable" data-cell-id="1" id="cell-1">
+      <div class="nb-gutter" id="gutter-1">In&nbsp;[&nbsp;]:</div>
+      <div class="nb-code">
+        <button class="nb-run-btn" aria-label="Run cell">▶</button>
+        <span class="nb-kw">import</span> <span class="nb-mod">cv</span><br/>
+        cv.<span class="nb-fn">social_links</span>()
+      </div>
+    </div>
+
+    <div class="nb-cell" id="output-1">
+      <div class="nb-gutter nb-gutter-out" id="out-gutter-1">
+        <span id="out-prompt-1">Out[&nbsp;]:</span>
+        <button class="nb-toggle-btn" data-target="out-content-1" aria-label="Toggle output">▶</button>
+      </div>
+      <div class="nb-output nb-hidden" id="out-content-1">
+        <div class="nb-out-dict">
+          <span class="nb-out-punc">{'{'}</span><br/>
+          {SOCIALS.map((social) => (
+            <div>
+              &nbsp;&nbsp;<a href={social.HREF} target="_blank" rel="noopener noreferrer" class="cv-social-link">
+                <span class="nb-out-dict-key">'{social.NAME}'</span>
+                <span class="nb-out-dict-punc">:&nbsp;&nbsp;</span>
+                <span class="nb-out-dict-str">'{social.TEXT}'</span>
+              </a>
             </div>
-            <div class="text-black dark:text-white font-semibold">
-              {entry.data.company}
+          ))}
+          <span class="nb-out-punc">{'}'}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nb-spacer"></div>
+
+    <!-- ── CELL 2: skills ──────────────────────────────────────── -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-md"><h2>§ Skills</h2></div>
+    </div>
+
+    <div class="nb-cell nb-runnable" data-cell-id="2" id="cell-2">
+      <div class="nb-gutter" id="gutter-2">In&nbsp;[&nbsp;]:</div>
+      <div class="nb-code">
+        <button class="nb-run-btn" aria-label="Run cell">▶</button>
+        cv.<span class="nb-fn">skills</span>()
+      </div>
+    </div>
+
+    <div class="nb-cell" id="output-2">
+      <div class="nb-gutter nb-gutter-out" id="out-gutter-2">
+        <span id="out-prompt-2">Out[&nbsp;]:</span>
+        <button class="nb-toggle-btn" data-target="out-content-2" aria-label="Toggle output">▶</button>
+      </div>
+      <div class="nb-output nb-hidden" id="out-content-2">
+        <table class="nb-out-table">
+          <thead>
+            <tr><th>category</th><th>technologies</th></tr>
+          </thead>
+          <tbody>
+            {SKILLS.map((row) => (
+              <tr>
+                <td>{row.category}</td>
+                <td class="cv-dim">{row.technologies.join(' · ')}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="nb-spacer"></div>
+
+    <!-- ── CELL 3: work_experience ─────────────────────────────── -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-md"><h2>§ Work Experience</h2></div>
+    </div>
+
+    <div class="nb-cell nb-runnable" data-cell-id="3" id="cell-3">
+      <div class="nb-gutter" id="gutter-3">In&nbsp;[&nbsp;]:</div>
+      <div class="nb-code">
+        <button class="nb-run-btn" aria-label="Run cell">▶</button>
+        <span class="nb-cm"># {experienceEntries.length} roles · sorted by date desc</span><br/>
+        cv.<span class="nb-fn">work_experience</span>()
+      </div>
+    </div>
+
+    <div class="nb-out-wide" id="output-3">
+      <div class="nb-out-wide-label" id="out-gutter-3">
+        <span id="out-prompt-3">Out[&nbsp;]:</span>
+        <button class="nb-toggle-btn" data-target="out-content-3" aria-label="Toggle output">▶</button>
+      </div>
+      <div class="nb-out-wide-body nb-hidden" id="out-content-3">
+        <div class="cv-timeline">
+          {experienceEntries.map((entry) => (
+            <div class="cv-entry">
+              <div class="cv-entry-meta">
+                <span class="cv-entry-dates">{entry.dateStart} – {entry.dateEnd}</span>
+                <span class="cv-entry-company">{entry.company}</span>
+                <span class="cv-entry-role">{entry.role}</span>
+                <span class="cv-entry-location">{entry.location}</span>
+              </div>
+              <ul class="cv-bullets">
+                {entry.bullets.map((b) => <li set:html={b} />)}
+              </ul>
             </div>
-            <div class="text-sm font-semibold">
-              {entry.data.role}
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="nb-spacer"></div>
+
+    <!-- ── CELL 4: research ────────────────────────────────────── -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-md"><h2>§ Research</h2></div>
+    </div>
+
+    <div class="nb-cell nb-runnable" data-cell-id="4" id="cell-4">
+      <div class="nb-gutter" id="gutter-4">In&nbsp;[&nbsp;]:</div>
+      <div class="nb-code">
+        <button class="nb-run-btn" aria-label="Run cell">▶</button>
+        cv.<span class="nb-fn">research</span>()
+      </div>
+    </div>
+
+    <div class="nb-out-wide" id="output-4">
+      <div class="nb-out-wide-label" id="out-gutter-4">
+        <span id="out-prompt-4">Out[&nbsp;]:</span>
+        <button class="nb-toggle-btn" data-target="out-content-4" aria-label="Toggle output">▶</button>
+      </div>
+      <div class="nb-out-wide-body nb-hidden" id="out-content-4">
+        <div class="cv-timeline">
+          {researchEntries.map((entry) => (
+            <div class="cv-entry">
+              <div class="cv-entry-meta">
+                <span class="cv-entry-dates">{entry.dateStart} – {entry.dateEnd}</span>
+                <span class="cv-entry-company">{entry.company}</span>
+                <span class="cv-entry-role">{entry.role}</span>
+                <span class="cv-entry-location">{entry.location}</span>
+              </div>
+              <ul class="cv-bullets">
+                {entry.bullets.map((b) => <li set:html={b} />)}
+              </ul>
             </div>
-            <article class="prose dark:prose-invert">
-              <entry.Content />
-            </article>
-          </li>
-        ))
-      }
-    </ul>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="nb-spacer"></div>
+
+    <!-- ── CELL 5: leadership ──────────────────────────────────── -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-md"><h2>§ Leadership</h2></div>
+    </div>
+
+    <div class="nb-cell nb-runnable" data-cell-id="5" id="cell-5">
+      <div class="nb-gutter" id="gutter-5">In&nbsp;[&nbsp;]:</div>
+      <div class="nb-code">
+        <button class="nb-run-btn" aria-label="Run cell">▶</button>
+        cv.<span class="nb-fn">leadership</span>()
+      </div>
+    </div>
+
+    <div class="nb-out-wide" id="output-5">
+      <div class="nb-out-wide-label" id="out-gutter-5">
+        <span id="out-prompt-5">Out[&nbsp;]:</span>
+        <button class="nb-toggle-btn" data-target="out-content-5" aria-label="Toggle output">▶</button>
+      </div>
+      <div class="nb-out-wide-body nb-hidden" id="out-content-5">
+        <div class="cv-timeline">
+          {leadershipEntries.map((entry) => (
+            <div class="cv-entry">
+              <div class="cv-entry-meta">
+                <span class="cv-entry-dates">{entry.dateStart} – {entry.dateEnd}</span>
+                <span class="cv-entry-company">{entry.company}</span>
+                <span class="cv-entry-role">{entry.role}</span>
+                <span class="cv-entry-location">{entry.location}</span>
+              </div>
+              <ul class="cv-bullets">
+                {entry.bullets.map((b) => <li set:html={b} />)}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="nb-spacer"></div>
+
+    <!-- ── CELL 6: projects ────────────────────────────────────── -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-md"><h2>§ Featured Projects</h2></div>
+    </div>
+
+    <div class="nb-cell nb-runnable" data-cell-id="6" id="cell-6">
+      <div class="nb-gutter" id="gutter-6">In&nbsp;[&nbsp;]:</div>
+      <div class="nb-code">
+        <button class="nb-run-btn" aria-label="Run cell">▶</button>
+        <span class="nb-kw">from</span> <span class="nb-mod">ansh.portfolio</span> <span class="nb-kw">import</span> <span class="nb-mod">projects</span><br/>
+        <span class="nb-cm"># {projects.length} published · sorted by date desc</span><br/>
+        cv.<span class="nb-fn">projects</span>()
+      </div>
+    </div>
+
+    <div class="nb-out-wide" id="output-6">
+      <div class="nb-out-wide-label" id="out-gutter-6">
+        <span id="out-prompt-6">Out[&nbsp;]:</span>
+        <button class="nb-toggle-btn" data-target="out-content-6" aria-label="Toggle output">▶</button>
+      </div>
+      <div class="nb-out-wide-body nb-hidden" id="out-content-6">
+        <table class="nb-out-table">
+          <thead>
+            <tr><th>project</th><th>tags</th><th>description</th></tr>
+          </thead>
+          <tbody>
+            {projects.map((project) => (
+              <tr>
+                <td>
+                  {(project.data.demoUrl || project.data.repoUrl) ? (
+                    <a href={project.data.demoUrl || project.data.repoUrl} target="_blank" rel="noopener noreferrer" class="cv-link">
+                      {project.data.title}
+                    </a>
+                  ) : project.data.title}
+                </td>
+                <td class="cv-dim">{project.data.tags.slice(0, 3).join(' · ')}</td>
+                <td class="cv-dim">{project.data.summary}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="nb-spacer"></div>
+
+  </div>
+
 </PageLayout>
+
+<style>
+  .cv-resume-link {
+    color: #79c0ff;
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    margin-left: 0.35rem;
+    border-bottom: 1px solid rgba(121, 192, 255, 0.3);
+    transition: border-color 0.15s ease;
+  }
+  .cv-resume-link:hover { border-color: rgba(121, 192, 255, 0.8); }
+
+  .cv-social-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+  .cv-social-link:hover { opacity: 0.75; }
+
+  /* Muted text used in tables */
+  .cv-dim {
+    color: rgba(230, 237, 243, 0.6) !important;
+    white-space: normal !important;
+    font-size: 0.74rem;
+  }
+
+  /* Timeline layout */
+  .cv-timeline { display: flex; flex-direction: column; }
+
+  .cv-entry {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 1.25rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid #21262d;
+  }
+  .cv-entry:last-child { border-bottom: none; }
+
+  .cv-entry-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.18rem;
+  }
+
+  .cv-entry-dates {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.67rem;
+    color: #8b949e;
+  }
+
+  .cv-entry-company {
+    font-family: 'Atkinson', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #e6edf3;
+    line-height: 1.3;
+  }
+
+  .cv-entry-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: #3fb950;
+    letter-spacing: 0.02em;
+  }
+
+  .cv-entry-location {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.67rem;
+    color: #8b949e;
+  }
+
+  /* Bullet list for work entries */
+  .cv-bullets {
+    margin: 0;
+    padding-left: 1.1rem;
+    list-style: disc;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .cv-bullets li {
+    font-size: 0.87rem;
+    line-height: 1.7;
+    color: rgba(201, 209, 217, 0.8);
+  }
+
+  .cv-bullets :global(strong) { color: #e6edf3; font-weight: 600; }
+  .cv-bullets :global(em)     { color: rgba(201, 209, 217, 0.65); font-style: italic; }
+  .cv-bullets :global(a)      { color: #79c0ff; text-decoration: none; }
+  .cv-bullets :global(a:hover){ text-decoration: underline; }
+
+  .cv-link {
+    color: #79c0ff;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .cv-link:hover { color: #a5d6ff; }
+
+  /* nb-out-wide-body visibility states */
+  .nb-out-wide-body.nb-hidden    { display: none !important; }
+  .nb-out-wide-body.nb-collapsed { display: none !important; }
+  .nb-out-wide-body.nb-revealed  { display: block; animation: nb-reveal 0.2s ease forwards; }
+
+  @keyframes nb-reveal {
+    from { opacity: 0; transform: translateY(3px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 640px) {
+    .cv-entry { grid-template-columns: 1fr; gap: 0.35rem; }
+    .cv-entry-meta { flex-direction: row; flex-wrap: wrap; gap: 0.25rem 0.5rem; align-items: baseline; }
+  }
+</style>
+
+<script is:inline>
+(function () {
+  var execCount = 0;
+  var TOTAL_CELLS = 6;
+
+  function runCell(cellId) {
+    var cell       = document.getElementById('cell-' + cellId);
+    var gutter     = document.getElementById('gutter-' + cellId);
+    var outPrompt  = document.getElementById('out-prompt-' + cellId);
+    var outContent = document.getElementById('out-content-' + cellId);
+    var outGutter  = document.getElementById('out-gutter-' + cellId);
+    var toggleBtn  = outGutter ? outGutter.querySelector('.nb-toggle-btn') : null;
+    var kernelDot    = document.getElementById('nb-kernel-dot');
+    var kernelStatus = document.getElementById('nb-kernel-status');
+
+    if (!outContent) return Promise.resolve();
+
+    cell && cell.classList.add('nb-running');
+    if (gutter) gutter.innerHTML = 'In\u00A0[*]:';
+    kernelDot    && kernelDot.classList.add('busy');
+    if (kernelStatus) kernelStatus.textContent = 'Python 3 | busy';
+
+    return new Promise(function (resolve) {
+      setTimeout(function () {
+        execCount++;
+        if (gutter)    gutter.innerHTML   = 'In\u00A0[' + execCount + ']:';
+        if (outPrompt) outPrompt.innerHTML = 'Out[' + execCount + ']:';
+
+        outContent.classList.remove('nb-hidden', 'nb-collapsed');
+        outContent.classList.add('nb-revealed');
+        outContent.style.animation = 'none';
+        outContent.offsetHeight;
+        outContent.style.animation = '';
+
+        if (toggleBtn) toggleBtn.textContent = '▼';
+        cell && cell.classList.remove('nb-running');
+        kernelDot    && kernelDot.classList.remove('busy');
+        if (kernelStatus) kernelStatus.textContent = 'Python 3 | idle';
+
+        resolve();
+      }, 280 + Math.random() * 220);
+    });
+  }
+
+  function resetAll() {
+    execCount = 0;
+    document.querySelectorAll('.nb-output.nb-revealed, .nb-out-wide-body.nb-revealed').forEach(function (el) {
+      el.classList.remove('nb-revealed');
+      el.classList.add('nb-hidden');
+    });
+    for (var i = 1; i <= TOTAL_CELLS; i++) {
+      var p = document.getElementById('out-prompt-' + i);
+      if (p) p.innerHTML = 'Out[\u00A0]:';
+      var g = document.getElementById('gutter-' + i);
+      if (g) g.innerHTML = 'In\u00A0[\u00A0]:';
+    }
+    document.querySelectorAll('.nb-toggle-btn').forEach(function (btn) { btn.textContent = '▶'; });
+  }
+
+  async function runAll() {
+    resetAll();
+    var cells = document.querySelectorAll('.nb-runnable[data-cell-id]');
+    for (var i = 0; i < cells.length; i++) {
+      await runCell(cells[i].dataset.cellId);
+      await new Promise(function (r) { setTimeout(r, 60); });
+    }
+  }
+
+  document.querySelectorAll('.nb-run-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var cell = btn.closest('.nb-runnable');
+      if (cell && cell.dataset.cellId) runCell(cell.dataset.cellId);
+    });
+  });
+
+  document.querySelectorAll('.nb-toggle-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      var hidden = target.classList.contains('nb-hidden') || target.classList.contains('nb-collapsed');
+      if (hidden) {
+        target.classList.remove('nb-hidden', 'nb-collapsed');
+        target.classList.add('nb-revealed');
+        btn.textContent = '▼';
+      } else {
+        target.classList.remove('nb-revealed');
+        target.classList.add('nb-collapsed');
+        btn.textContent = '▶';
+      }
+    });
+  });
+
+  var runAllBtn = document.getElementById('nb-run-all');
+  if (runAllBtn) runAllBtn.addEventListener('click', runAll);
+
+  setTimeout(runAll, 700);
+})();
+</script>

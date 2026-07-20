@@ -148,3 +148,618 @@ article img {
 #meteors .shower.ul {
   @apply rotate-315;
 }
+
+/* ============================================================
+   THEME KEYFRAMES
+   ============================================================ */
+
+@keyframes letterRain {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes leafSway {
+  0%, 100% {
+    transform: rotate(-8deg) skewX(2deg);
+  }
+  50% {
+    transform: rotate(8deg) skewX(-2deg);
+  }
+}
+
+@keyframes leafSway2 {
+  0%, 100% {
+    transform: rotate(6deg) skewX(-1deg);
+  }
+  50% {
+    transform: rotate(-10deg) skewX(3deg);
+  }
+}
+
+@keyframes fireflyFloat {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateY(-20px) translateX(10px);
+  }
+  75% {
+    opacity: 1;
+  }
+}
+
+@keyframes inkBlot {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
+  }
+  100% {
+    clip-path: circle(150% at 50% 50%);
+    opacity: 1;
+  }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes starOrbit {
+  0% { transform: rotate(0deg) translateX(4px) rotate(0deg); opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { transform: rotate(360deg) translateX(4px) rotate(-360deg); opacity: 0.4; }
+}
+
+@keyframes shootingStar {
+  0% {
+    transform: translateX(0) translateY(0) rotate(215deg);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-500px) translateY(300px) rotate(215deg);
+    opacity: 0;
+  }
+}
+
+@keyframes paperUnfurl {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes twinkle-star {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ============================================================
+   NOTEBOOK THEME
+   ============================================================ */
+
+html[data-theme="notebook"] {
+  background: #0d1117;
+  color-scheme: dark;
+}
+
+html[data-theme="notebook"] body {
+  background: #0d1117;
+  color: #e6edf3;
+}
+
+html[data-theme="notebook"] main {
+  background: #0d1117;
+}
+
+html[data-theme="notebook"] header:not(.scrolled) {
+  background: rgba(13, 17, 23, 0.97);
+  border-color: rgba(63, 185, 80, 0.2);
+}
+
+html[data-theme="notebook"] header.scrolled {
+  background: rgba(13, 17, 23, 0.99);
+  border-color: rgba(63, 185, 80, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+html[data-theme="notebook"] header a,
+html[data-theme="notebook"] header button {
+  color: #e6edf3;
+}
+
+html[data-theme="notebook"] header a:hover {
+  color: #3fb950;
+}
+
+html[data-theme="notebook"] footer {
+  background: #0d1117;
+  color: #8b949e;
+}
+
+html[data-theme="notebook"] footer .border-t {
+  border-color: rgba(63, 185, 80, 0.12);
+}
+
+/* --- Notebook toolbar --- */
+/* Sits sticky below the 64px fixed header */
+.nb-toolbar {
+  margin-top: 64px;
+  position: sticky;
+  top: 64px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  height: 40px;
+  background: #161b22;
+  border-bottom: 1px solid #21262d;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: #8b949e;
+}
+
+.nb-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nb-toolbar-icon {
+  color: rgba(63, 185, 80, 0.7);
+  font-size: 0.75rem;
+}
+
+.nb-toolbar-filename {
+  color: #e6edf3;
+  font-size: 0.75rem;
+}
+
+.nb-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nb-run-all-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.18rem 0.6rem;
+  background: transparent;
+  border: 1px solid rgba(63, 185, 80, 0.35);
+  border-radius: 3px;
+  color: #3fb950;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.67rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nb-run-all-btn:hover {
+  background: rgba(63, 185, 80, 0.1);
+  border-color: rgba(63, 185, 80, 0.7);
+}
+
+.nb-kernel {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+}
+
+.nb-kernel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3fb950;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+.nb-kernel-dot.busy {
+  background: #f2cc60;
+  animation: blink-cursor 0.4s step-end infinite;
+}
+
+/* --- Notebook page container --- */
+.nb-page {
+  max-width: 900px;
+  /* margin: 0 auto; */
+  padding: 2rem 1.5rem 6rem;
+}
+
+/* --- Cell layout (gutter + content) --- */
+.nb-cell {
+  display: grid;
+  grid-template-columns: 66px 1fr;
+  align-items: start;
+}
+
+.nb-cell + .nb-cell {
+  margin-top: 2px;
+}
+
+/* --- Gutter (In [N]: label) --- */
+.nb-gutter {
+  padding: 0.8rem 0.4rem 0.8rem 0;
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: rgba(63, 185, 80, 0.45);
+  user-select: none;
+  line-height: 1.6;
+  white-space: nowrap;
+  padding-top: 0.85rem;
+}
+
+.nb-gutter.nb-gutter-out {
+  color: rgba(249, 115, 22, 0.5);
+  padding-top: 0.9rem;
+}
+
+/* --- Code cell content --- */
+.nb-code {
+  background: #161b22;
+  border: 1px solid #21262d;
+  border-left: 3px solid transparent;
+  border-radius: 0 4px 4px 0;
+  padding: 0.7rem 2.5rem 0.7rem 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.84rem;
+  line-height: 1.7;
+  color: #e6edf3;
+  position: relative;
+  transition: border-left-color 0.15s ease;
+}
+
+.nb-cell:hover .nb-code,
+.nb-cell:focus-within .nb-code {
+  border-left-color: rgba(56, 139, 253, 0.4);
+}
+
+.nb-cell.nb-running .nb-code {
+  border-left-color: #388bfd;
+}
+
+/* Run button (appears on hover) */
+.nb-run-btn {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(63, 185, 80, 0.25);
+  border-radius: 3px;
+  color: rgba(63, 185, 80, 0.5);
+  font-size: 0.6rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  opacity: 0;
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1;
+}
+
+.nb-cell:hover .nb-run-btn {
+  opacity: 1;
+}
+
+.nb-run-btn:hover {
+  background: rgba(63, 185, 80, 0.12);
+  border-color: rgba(63, 185, 80, 0.65);
+  color: #3fb950;
+}
+
+/* --- Markdown cell content --- */
+.nb-md {
+  padding: 0.3rem 0 0.3rem 0.75rem;
+  color: #e6edf3;
+  line-height: 1.7;
+}
+
+.nb-md h1 {
+  font-family: 'Atkinson', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: #e6edf3;
+  margin: 0.25rem 0 0.4rem 0;
+  line-height: 1.15;
+}
+
+.nb-md h2 {
+  font-family: 'Atkinson', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #c9d1d9;
+  margin: 0.15rem 0 0.15rem 0;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #21262d;
+}
+
+.nb-md p {
+  color: rgba(201, 209, 217, 0.7);
+  margin: 0.1rem 0 0 0;
+  font-size: 0.9rem;
+}
+
+.nb-md em { color: rgba(201, 209, 217, 0.5); font-style: italic; }
+.nb-md strong { color: #e6edf3; font-weight: 600; }
+
+.nb-md code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  background: #21262d;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  color: #79c0ff;
+}
+
+/* --- Output cell --- */
+.nb-output {
+  padding: 0.7rem 1rem;
+  border-left: 3px solid #21262d;
+  border-radius: 0 4px 4px 0;
+  color: #e6edf3;
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+/* Hidden-by-default for runnable outputs */
+.nb-output.nb-hidden {
+  display: none;
+}
+
+.nb-output.nb-revealed {
+  display: block;
+  animation: nb-reveal 0.2s ease forwards;
+}
+
+@keyframes nb-reveal {
+  from { opacity: 0; transform: translateY(3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Cell spacer */
+.nb-spacer { height: 1.25rem; }
+.nb-spacer-sm { height: 0.5rem; }
+
+/* --- Syntax highlighting tokens --- */
+.nb-kw  { color: #ff7b72; }   /* keywords: import, from, def, as, return */
+.nb-mod { color: #79c0ff; }   /* module/package names */
+.nb-fn  { color: #d2a8ff; }   /* function calls */
+.nb-str { color: #a5d6ff; }   /* string literals */
+.nb-cm  { color: #8b949e; }   /* comments */
+.nb-num { color: #f2cc60; }   /* numbers */
+.nb-op  { color: #8b949e; }   /* operators */
+.nb-arg { color: #ffa657; }   /* arguments */
+
+/* --- Output content: dict-style --- */
+.nb-out-dict {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  line-height: 1.9;
+  color: #e6edf3;
+}
+
+.nb-out-dict-key    { color: #a5d6ff; }
+.nb-out-dict-str    { color: #3fb950; }
+.nb-out-dict-punc   { color: #8b949e; }
+.nb-out-dict-num    { color: #f2cc60; }
+
+/* --- Output content: table --- */
+.nb-out-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+}
+
+.nb-out-table th {
+  text-align: left;
+  padding: 0.25rem 0.75rem;
+  color: #8b949e;
+  border-bottom: 1px solid #21262d;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.nb-out-table td {
+  padding: 0.3rem 0.75rem;
+  border-bottom: 1px solid rgba(33,38,45,0.6);
+  vertical-align: top;
+}
+
+.nb-out-table td:first-child { color: #79c0ff; white-space: nowrap; }
+.nb-out-table td:nth-child(2) { color: #3fb950; white-space: nowrap; }
+.nb-out-table td:nth-child(3) { color: rgba(230, 237, 243, 0.7); }
+
+.nb-out-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* --- Output: print-style text --- */
+.nb-out-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: rgba(230, 237, 243, 0.8);
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.nb-out-text .nb-out-hl  { color: #e6edf3; font-weight: 600; }
+.nb-out-text .nb-out-dim { color: #8b949e; }
+.nb-out-text .nb-out-sep { color: #21262d; }
+.nb-out-text .nb-out-green { color: #3fb950; }
+.nb-out-text .nb-out-blue  { color: #79c0ff; }
+
+/* --- Stderr/print output --- */
+.nb-out-stream {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: #8b949e;
+  line-height: 1.6;
+}
+
+/* --- Mobile --- */
+@media (max-width: 640px) {
+  .nb-page {
+    padding: 1.5rem 0.75rem 5rem;
+  }
+  .nb-cell {
+    grid-template-columns: 50px 1fr;
+  }
+  .nb-gutter {
+    font-size: 0.6rem;
+    padding-right: 0.3rem;
+  }
+  .nb-code {
+    font-size: 0.75rem;
+    padding: 0.6rem 0.75rem 0.6rem 0.75rem;
+  }
+  .nb-toolbar {
+    padding: 0 0.75rem;
+    font-size: 0.62rem;
+  }
+  .nb-toolbar-icon { display: none; }
+  .nb-run-all-btn { display: none; }
+}
+/* ============================================================
+   NOTEBOOK LAYOUT FIXES & ENHANCEMENTS
+   ============================================================ */
+
+/* Critical: prevent grid children from overflowing their column */
+.nb-cell > * {
+  min-width: 0;
+}
+
+/* Wider page, more breathing room */
+.nb-page {
+  max-width: 1540px;
+}
+
+/* Code cells: allow horizontal scroll instead of blowing out the grid */
+.nb-code {
+  overflow-x: auto;
+}
+
+/* Output gutter: flex column to stack prompt label + toggle button */
+.nb-gutter.nb-gutter-out {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  color: rgba(249, 115, 22, 0.5);
+  padding-top: 0.9rem;
+}
+
+/* Hide/show toggle button inside output gutter */
+.nb-toggle-btn {
+  background: none;
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  border-radius: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  color: rgba(249, 115, 22, 0.38);
+  cursor: pointer;
+  padding: 0.08rem 0.28rem;
+  line-height: 1;
+  transition: all 0.15s ease;
+}
+
+.nb-toggle-btn:hover {
+  background: rgba(249, 115, 22, 0.06);
+  border-color: rgba(249, 115, 22, 0.5);
+  color: rgba(249, 115, 22, 0.85);
+}
+
+/* Collapsed output state */
+.nb-output.nb-collapsed {
+  display: none !important;
+}
+
+/* Wide output row: flexbox instead of grid to avoid 1fr overflow issues */
+.nb-out-wide {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 2px;
+}
+
+.nb-out-wide-label {
+  width: 66px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  padding: 1rem 0.4rem 0 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: rgba(249, 115, 22, 0.5);
+  user-select: none;
+}
+
+.nb-out-wide-body {
+  flex: 1;
+  min-width: 0;
+  border-left: 3px solid #21262d;
+  padding: 1rem 0 0.5rem 0.75rem;
+}
+
+/* ============================================================
+   NOTEBOOK HEADER OVERRIDES
+   ============================================================ */
+
+html[data-theme="notebook"] #header {
+  background: #161b22 !important;
+  border-bottom: 1px solid #21262d !important;
+}
+
+html[data-theme="notebook"] #header .brand-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  letter-spacing: -0.01em;
+  color: #e6edf3 !important;
+}
+
+html[data-theme="notebook"] #header .brand-link:hover {
+  color: #3fb950 !important;
+}
+
+/* Header nav styles are now scoped within Header.astro */
+
+@media (max-width: 640px) {
+  .nb-out-wide-label {
+    width: 50px;
+    font-size: 0.6rem;
+  }
+}

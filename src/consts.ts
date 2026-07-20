@@ -59,6 +59,12 @@ export const SOCIALS: Socials = [
     TEXT: "anshbhatnagar1612@gmail.com",
     HREF: "mailto:anshbhatnagar1612@gmail.com",
   },
+    { 
+    NAME: "UCSD_Email",
+    ICON: "email", 
+    TEXT: "abhatnagar@ucsd.edu",
+    HREF: "mailto:abhatnagar@ucsd.edu",
+  },
   { 
     NAME: "Github",
     ICON: "github",

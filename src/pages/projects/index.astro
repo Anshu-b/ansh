@@ -1,9 +1,7 @@
 ---
 import { getCollection } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
-import TopLayout from "@layouts/TopLayout.astro"
-import BottomLayout from "@layouts/BottomLayout.astro"
-import Projects from "@components/Projects"
+import ProjectList from "@components/ProjectList"
 import { PROJECTS } from "@consts"
 
 const projects = (await getCollection("projects"))
@@ -14,15 +12,65 @@ const tags = [...new Set(projects.flatMap(project => project.data.tags))]
   .sort((a, b) => a.localeCompare(b))
 ---
 
-<PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
-  <TopLayout>
-    <div class="animate page-heading">
-      {PROJECTS.TITLE}
+<PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION} theme="notebook" notebookFile="projects.ipynb">
+
+  <div class="nb-page">
+
+    <!-- Markdown cell: header -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-md">
+        <h1>Project Log</h1>
+        <p><em>engineering ventures, ml systems, and hardware experiments</em></p>
+      </div>
     </div>
-  </TopLayout>
-  <BottomLayout>
-    <div class="animate">
-      <Projects client:load tags={tags} data={projects} />
+
+    <div class="nb-spacer-sm"></div>
+
+    <!-- Code cell: load projects -->
+    <div class="nb-cell">
+      <div class="nb-gutter proj-in-gutter">In&nbsp;[1]:</div>
+      <div class="nb-code">
+        <span class="nb-kw">from</span> <span class="nb-mod">ansh.portfolio</span> <span class="nb-kw">import</span> <span class="nb-mod">projects</span><br/>
+        <span class="nb-cm"># {projects.length} total · {tags.length} tech categories</span><br/>
+        projects.<span class="nb-fn">load_all</span>()
+      </div>
     </div>
-  </BottomLayout>
+
+    <!-- Wide output: flex layout so ProjectList gets full width -->
+    <div class="nb-out-wide">
+      <div class="nb-out-wide-label">
+        <span>Out[1]:</span>
+        <button class="nb-toggle-btn" data-target="projects-output" aria-label="Toggle output">▼</button>
+      </div>
+      <div class="nb-out-wide-body" id="projects-output">
+        <ProjectList client:load tags={tags} data={projects} />
+      </div>
+    </div>
+
+  </div>
+
 </PageLayout>
+
+<style>
+  .proj-in-gutter {
+    color: rgba(63, 185, 80, 0.7);
+    padding-top: 0.85rem;
+  }
+</style>
+
+<script is:inline>
+  document.querySelectorAll('.nb-toggle-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      if (target.classList.contains('nb-collapsed')) {
+        target.classList.remove('nb-collapsed');
+        btn.textContent = '▼';
+      } else {
+        target.classList.add('nb-collapsed');
+        btn.textContent = '▶';
+      }
+    });
+  });
+</script>

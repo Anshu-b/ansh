@@ -1,9 +1,7 @@
 ---
 import { getCollection } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
-import TopLayout from "@layouts/TopLayout.astro"
-import BottomLayout from "@layouts/BottomLayout.astro"
-import Blog from "@components/Blog"
+import BlogList from "@components/BlogList"
 import { BLOG } from "@consts"
 
 const posts = (await getCollection("blog"))
@@ -14,17 +12,65 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags))]
   .sort((a, b) => a.localeCompare(b))
 ---
 
-<PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
-  <TopLayout>
-    <div class="animate page-heading">
-      {BLOG.TITLE}
+<PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION} theme="notebook" notebookFile="blog.ipynb">
+
+  <div class="nb-page">
+
+    <!-- Markdown cell: header -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-md">
+        <h1>Knowledge Base</h1>
+        <p><em>writing on data science, systems, and things I'm figuring out</em></p>
+      </div>
     </div>
-  </TopLayout>
-  <BottomLayout>
-    <div class="animate">
-      <Blog client:load tags={tags} data={posts} />
+
+    <div class="nb-spacer-sm"></div>
+
+    <!-- Code cell: query -->
+    <div class="nb-cell">
+      <div class="nb-gutter blog-in-gutter">In&nbsp;[1]:</div>
+      <div class="nb-code">
+        <span class="nb-kw">from</span> <span class="nb-mod">ansh.knowledge_base</span> <span class="nb-kw">import</span> <span class="nb-mod">posts</span><br/>
+        <span class="nb-cm"># {posts.length} entries · filter by tag to narrow</span><br/>
+        posts.<span class="nb-fn">search</span>(<span class="nb-arg">tags</span><span class="nb-op">=</span><span class="nb-op">[]</span>, <span class="nb-arg">sort</span><span class="nb-op">=</span><span class="nb-str">'date_desc'</span>)
+      </div>
     </div>
-  </BottomLayout>
+
+    <!-- Wide output: flex layout so BlogList gets full width -->
+    <div class="nb-out-wide">
+      <div class="nb-out-wide-label">
+        <span>Out[1]:</span>
+        <button class="nb-toggle-btn" data-target="blog-output" aria-label="Toggle output">▼</button>
+      </div>
+      <div class="nb-out-wide-body" id="blog-output">
+        <BlogList client:load tags={tags} data={posts} />
+      </div>
+    </div>
+
+  </div>
+
 </PageLayout>
 
+<style>
+  .blog-in-gutter {
+    color: rgba(63, 185, 80, 0.7);
+    padding-top: 0.85rem;
+  }
+</style>
 
+<script is:inline>
+  document.querySelectorAll('.nb-toggle-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      if (target.classList.contains('nb-collapsed')) {
+        target.classList.remove('nb-collapsed');
+        btn.textContent = '▼';
+      } else {
+        target.classList.add('nb-collapsed');
+        btn.textContent = '▶';
+      }
+    });
+  });
+</script>

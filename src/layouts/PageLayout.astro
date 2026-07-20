@@ -4,12 +4,12 @@ import BaseHead from "@components/BaseHead.astro"
 import Header from "@components/Header.astro"
 import Footer from "@components/Footer.astro"
 import Drawer from "@components/Drawer.astro"
-const { title, description } = Astro.props
+const { title, description, theme = "default", notebookFile } = Astro.props
 import { SITE } from "@consts"
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme={theme}>
   <head>
     <BaseHead title={`${title} | ${SITE.TITLE}`} description={description} />
   </head>
@@ -17,6 +17,21 @@ import { SITE } from "@consts"
     <Header />
     <Drawer />
     <main>
+      {notebookFile && (
+        <div class="nb-toolbar" id="nb-toolbar">
+          <div class="nb-toolbar-left">
+            <span class="nb-toolbar-icon">◉</span>
+            <span class="nb-toolbar-filename">{notebookFile}</span>
+          </div>
+          <div class="nb-toolbar-right">
+            <button class="nb-run-all-btn" id="nb-run-all">▶▶ Run All</button>
+            <div class="nb-kernel">
+              <span class="nb-kernel-dot" id="nb-kernel-dot"></span>
+              <span id="nb-kernel-status">Python 3 | idle</span>
+            </div>
+          </div>
+        </div>
+      )}
       <slot />
     </main>
     <Footer />
