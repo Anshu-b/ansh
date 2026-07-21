@@ -32,6 +32,7 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
   - **Professor:** Mary Boyle
   - **Grade:** A
   - **Workload:** Not Much
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐
   - **When** - Spring 2024
   - **My Thoughts:**
     - I loved how this class introduced so many areas of cognitive science, from sleep to AI, through talks by different professors and researchers.
@@ -42,6 +43,7 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
   - **Professor:** Kyle Shannon
   - **Grade:** A
   - **Workload:** Not Much
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
   - **When** - Fall 2023
   - **My Thoughts:**
     - I found this class to be pretty light but super helpful, especially as a freshman trying to get settled at UCSD.  
@@ -56,6 +58,7 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
   - **Professor:** Kyle Shannon
   - **Grade:** A
   - **Workload:** Not Much
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐
   - **When** - Spring 2024
   - **My Thoughts:**
     - I saw this as a very light course, a gentle introduction to data science that focused more on the *purpose* of data science as a tool than on heavy technical details.  
@@ -63,10 +66,19 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
     - Kyle made it genuinely interesting with live demos and special lectures that went beyond the standard material. One standout was when he presented the results of a data science project, which helped me appreciate how crucial communication is in a corporate environment, especially when you’re the only data scientist in the room.  
     - **TUTOR PERSPECTIVE:** A year later, I got to come back as a tutor for this class, running demos on SQL, Python, and even a bit of Reinforcement Learning. I loved sitting in on lectures again (mainly just to hang out with Kyle) and revisiting material from sessions I totally didn’t skip the first time. It’s a bit of a shame more students don’t show up, since there’s so much potential for this class to be fun, but low engagement really holds it back.
 
+- ### COGS 10: Cognitive Consequences of Technology
+  - **Professor:** 
+  - **Grade:** 
+  - **Workload:** 
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
+  - **When** - Spring 2026
+  - **My Thoughts:**
+
 - ### COGS 14A: Introduction to Research Methods
   - **Professor:** James Barrera
   - **Grade:** A-
   - **Workload:** Decent
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐
   - **When** - Spring 2024
   - **My Thoughts:**
     - I took this class mainly because it’s part of the "Machine Learning & Artificial Intelligence" domain track for the Data Science major. While it does touch on foundations relevant to ML and AI from a stats perspective, most of the material is actually geared toward neuroscience research, which isn’t a bad thing, just something I noticed.  
@@ -78,6 +90,7 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
   - **Professor:** Drew Ellen Hoffman
   - **Grade:** A+
   - **Workload:** Decent
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐
   - **When** - Spring 2024
   - **My Thoughts:**
     - This class was honestly pretty easy for me since it mostly felt like a repeat of AP Stats, just with a few new topics sprinkled in.  
@@ -85,10 +98,19 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
     - It was cool to learn a new statistical software package for homework, though at the end of the day the TI-84 was still my best friend for getting through the class.
 
 
+- ### COGS 17: Neurobiology of Cognition
+  - **Professor:** 
+  - **Grade:** 
+  - **Workload:** 
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐
+  - **When** - Winter 2026
+  - **My Thoughts:**
+
 - ### COGS 100: Cyborgs Now & In the Future
   - **Professor:** Michael Allen Gordon
   - **Grade:** A
   - **Workload:** Decent
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
   - **When** - Summer 2024
   - **My Thoughts:**
     - This class was something for sure.  
@@ -97,10 +119,19 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
     - That said, a lot of the topics are genuinely fascinating, like cognitive offloading, niche construction, and the origins of the artificial neuron that inspired today’s neural networks.  
     - If you’re a Cog Sci major or minor, you’ll have to take this anyway. But even if you’re not, it’s a solid pick for an upper-div GE, pretty interesting and not heavy on homework.
 
+- ### COGS 101B: Learning, Memory and Attention
+  - **Professor:** 
+  - **Grade:** 
+  - **Workload:** 
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐
+  - **When** - Spring 2026
+  - **My Thoughts:**
+
 - ### COGS 101C: Language
   - **Professor:** Alyssa Truman
   - **Grade:** A
   - **Workload:** Decent
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
   - **When** - Summer 2024
   - **My Thoughts:**
     - I found this class super interesting, it dove into linguistics and the history of language from both biological and cultural perspectives, which honestly wasn’t something I ever expected to study.  
@@ -111,6 +142,7 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
   - **Professor:** Jason Fleischer
   - **Grade:** A
   - **Workload:** Decent
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
   - **When** - Fall 2024
   - **My Thoughts:**
     - This class basically runs parallel to DSC 80, but without the heavy theory, it’s all about getting exposed to a wide range of implementation libraries.  
@@ -120,8 +152,9 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
 
 - ### COGS 118A: Introduction to Supervised Machine Learning
   - **Professor:** Anjum Gupta
-  - **Grade:** IP
+  - **Grade:** A
   - **Workload:** Decent
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
   - **When** - Summer 2025
   - **My Thoughts:**
 
@@ -129,6 +162,7 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
   - **Professor:** Anjum Gupta
   - **Grade:** A
   - **Workload:** Decent
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
   - **When** - Summer 2024
   - **My Thoughts:**
     - This class had a *steep* learning curve for me since I somehow took it with only 2 out of the 7 recommended prereqs. The class itself wasn’t inherently hard, but not being up to speed on the math—like not even knowing what a Poisson distribution was—definitely made it tougher.  
@@ -139,6 +173,7 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
   - **Professor:** Ben Bergen
   - **Grade:** P
   - **Workload:** Decent
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐⭐
   - **When** - Summer 2024
   - **My Thoughts:**
     - This class was excellent, but honestly there should be more formal prereqs, having taken something like DSC 40A or COGS 118A/185 beforehand will really help build intuition for the math you dive into.  
@@ -146,10 +181,19 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
     - The final project was actually an exam where we had to defend our position on whether or not AI can “think,” which was super thought-provoking.  
     - The course material itself was very interesting, starting from the historical foundations of LLMs, moving through transformers and their architectures, and exploring their impact on cognitive science.
 
+- ### COGS 181: Neural Networks and Deep Learning
+  - **Professor:** Zhouwen Tu
+  - **Grade:** 
+  - **Workload:**
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐⭐
+  - **When** - Winter 2026
+  - **My Thoughts:**
+
 - ### COGS 185: Advanced Machine Learning Methods
   - **Professor:** Zhouwen Tu
   - **Grade:** A
   - **Workload:** High
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐⭐
   - **When** - Spring 2025
   - **My Thoughts:**
     - Zhouwen Tu was an excellent professor who somehow managed to pack an insane amount of material into this course.  
@@ -160,6 +204,7 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
   - **Professor:** Anjum Gupta
   - **Grade:** 
   - **Workload:** 
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
   - **When** - Summer 2025
   - **My Thoughts:**
 
@@ -167,6 +212,7 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
   - **Professor:** Jason Fleischer
   - **Grade:** A
   - **Workload:** High
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
   - **When** - Winter 2025
   - **My Thoughts:**
     - This class started by covering a bunch of crucial concepts and algorithms, like A*, that honestly should be required in DSC courses but somehow aren’t.  
@@ -179,6 +225,15 @@ If you think your degree plan can handle the extra workload, I'd reccomend check
   - **Professor:** Kyle Shannon
   - **Grade:** P
   - **Workload:** Low
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
   - **When** - Spring 2025
   - **My Thoughts:**
     - Tutoring for COGS 9, a fun perspective of being on the teaching side of things in a low-stakes class.
+
+- ### COGS 195P: Pedagogy/Learning Apprenticeship
+  - **Professor:** 
+  - **Grade:** 
+  - **Workload:** 
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
+  - **When** - Spring 2026
+  - **My Thoughts:**

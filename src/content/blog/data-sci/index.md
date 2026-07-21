@@ -17,6 +17,7 @@ tags:
   - **Professor:** Rod Albuyeh
   - **Grade:** A
   - **Workload:** Medium/High
+  - **My Course-Value Rating (out of 5):** ⭐⭐
   - **When** - Fall 2023
   - **My Thoughts:**
     - This is the first data science class you’ll ever take at UCSD, and honestly it’s a pretty solid introduction to the major - although I have some conflicting thoughts on it as mentioned below.  
@@ -29,6 +30,7 @@ tags:
   - **Professor:** Marina Langlois
   - **Grade:** A
   - **Workload:** Medium/High
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
   - **When** - Winter 2024
   - **My Thoughts:**
     - Coming from mainly Java in AP Computer Science and only dabbling in Python, this class was huge for me since it really drilled in core software development concepts and got me super comfortable with Python, knowledge I still rely on today.  
@@ -41,6 +43,7 @@ tags:
   - **Professor:** Marina Langlois
   - **Grade:** A-
   - **Workload:** High
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐⭐
   - **When** - Spring 2024
   - **My Thoughts:**
     - This is probably the hardest lower-division class in the major.  
@@ -54,6 +57,7 @@ tags:
   - **Professor:** Kyle Shannon
   - **Grade:** A
   - **Workload:** High
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐⭐
   - **When** - Summer 2024
   - **My Thoughts:**
     - Before taking this class, it was hyped up as *the* hardest course in the lower-division DSC major, so I went in absolutely shivering my timbers (though honestly, after taking both, I think DSC 30 was worse).  
@@ -69,6 +73,7 @@ tags:
   - **Professor:** Irfan Khan
   - **Grade:** A
   - **Workload:** Medium
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
   - **When** - Summer 2024
   - **My Thoughts:**
     - Just like 40A, I took this over 5 weeks in the summer, except this time I stacked it with three other classes.  
@@ -80,6 +85,7 @@ tags:
   - **Professor:** Sam Lau
   - **Grade:** A
   - **Workload:** High
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐⭐
   - **When** - Fall 2024
   - **My Thoughts:**
     - This class pretty much covers exactly what you’ll be doing in your first data science internship: tons of exploratory data analysis, basic machine learning, and most importantly, learning how to actually interpret and communicate data in words.  
@@ -92,6 +98,7 @@ tags:
   - **Professor:** Marina Langlois
   - **Grade:** P
   - **Workload:** Low
+  - **My Course-Value Rating (out of 5):** ⭐⭐
   - **When** - Winter 2025
   - **My Thoughts:**
     - This is a short, light 2-unit P/NP class that you only take if you’re becoming a tutor.  
@@ -103,6 +110,7 @@ tags:
   - **Professor:** Babak Salimi
   - **Grade:** A-
   - **Workload:** Medium
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐
   - **When** - Spring 2025
   - **My Thoughts:**
     - This class was relatively light on homework, but the exams were definitely tough and the concepts, especially relational algebra, took a solid amount of time to really get.  
@@ -115,6 +123,7 @@ tags:
   - **Professor:** Alexandros Kolovos
   - **Grade:** 
   - **Workload:** 
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐
   - **When** - Fall 2025
   - **My Thoughts:**
 
@@ -122,6 +131,7 @@ tags:
   - **Professor:** Sam Lau
   - **Grade:** A
   - **Workload:** High
+  - **My Course-Value Rating (out of 5):** ⭐
   - **When** - Winter 2025
   - **My Thoughts:**
     - By far my least favorite class in the DSC major. By a mile.  Not "hard" by any means (especially with AI), but very time consuming and extremely annoying.
@@ -130,10 +140,19 @@ tags:
     - As much as I loved Sam for DSC 80, I don’t think he’s quite up to speed with DSC 106. The course feels like it’s just doing stuff with no real direction. Labs are a sequential grind through JavaScript, the projects are vaguely scoped visualizations with little actual guidance on how to build them, and lectures are mostly about design principles—like what colors to pick.  
     - The final project showcase was probably the only part of the class that felt truly well put together. It let us build a tangible product and practice telling stories with data for both technical and non-technical audiences. But even then, we were basically just encouraged to prompt-engineer our way through, without any real instruction on dashboard design or best coding practices for effective data viz.
 
+- ### DSC 120: Signal Processing for Data Analysis
+  - **Professor:** Gal Mishne
+  - **Grade:** P
+  - **Workload:** 
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐⭐
+  - **When** - Winter 2026
+  - **My Thoughts:**
+
 - ### DSC 140A: Probabilistic Modeling & Machine Learning
   - **Professor:** Justin Eldridge
   - **Grade:** B+
   - **Workload:** High
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
   - **When** - Winter 2025
   - **My Thoughts:**
     - This is probably the most difficult class in the major from a purely conceptual standpoint. The mathematical foundations required are very high-level, and without putting in the time and commitment, it’s pretty unlikely you’ll actually follow what’s going on.  
@@ -147,6 +166,7 @@ tags:
   - **Professor:** Lily Weng
   - **Grade:** A+
   - **Workload:** High
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐
   - **When** - Spring 2025
   - **My Thoughts:**
     - This class is structured pretty uniquely, it's 100% homework, no exams or anything else. There was an optional extra credit project, but basically nobody did it since everyone already had high homework scores.  
@@ -158,6 +178,7 @@ tags:
   - **Professor:** Marina Langlois
   - **Grade:** A-
   - **Workload:** High
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐⭐
   - **When** - Spring 2025
   - **My Thoughts:**
     - This was only the second time the course had been offered, and while it was taught by Marina, it retained the original “Justin-style” structure: 2 midterms with an optional final (which serves as a midterm redemption), plus a mix of homeworks and online labs.  
@@ -166,3 +187,44 @@ tags:
     - Personally, I enjoyed and understood the first half (on advanced data structures) more than the second half (advanced algorithms), and my midterm scores reflected that.  
     - Since this is a DSC 190 elective, it’s not required, but it covers some very practical and interesting topics, so I’d recommend it if you have an open elective slot.  
     - Heads-up: it overlaps a lot with CSE 100, so if you're taking that, this class might feel repetitive.
+- ### DSC 190: Topics in Data Science - Statistical Data Analysis
+  - **Professor:** Armin Schwartzman
+  - **Grade:** A-
+  - **Workload:** 
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐
+  - **When** - Fall 2025
+  - **My Thoughts:**
+
+- ### DSC 190: Topics in Data Science - IoT and Sensors
+  - **Professor:** Tauhidur Rahman
+  - **Grade:** P
+  - **Workload:** 
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐⭐
+  - **When** - Winter 2026
+  - **My Thoughts:**
+
+- ### DSC 180A: 
+  - **Professor:** Robert Wilderman
+  - **Grade:** 
+  - **Workload:** 
+  - **My Course-Value Rating (out of 5):** 
+  - **When** - Fall 2026
+  - **My Thoughts:**
+
+- ### DSC 180B:
+  - **Professor:** Robert Wilderman
+  - **Grade:** 
+  - **Workload:** 
+  - **My Course-Value Rating (out of 5):** 
+  - **When** - Winter 2027
+  - **My Thoughts:**
+
+- ### DSC 198:
+  - **Professor:** Me!
+  - **Grade:** 
+  - **Workload:** 
+  - **My Course-Value Rating (out of 5):** ⭐⭐⭐⭐⭐
+  - **When** - Winter 2026
+  - **My Thoughts:**
+
+

@@ -1,35 +1,161 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
-import TopLayout from "@layouts/TopLayout.astro"
-import BottomLayout from "@layouts/BottomLayout.astro"
-import ArticleTopLayout from "@layouts/ArticleTopLayout.astro"
-import ArticleBottomLayout from "@layouts/ArticleBottomLayout.astro"
+import { formatDate, readingTime } from "@lib/utils"
 
-// Create the static blog pages
 export async function getStaticPaths() {
-	const posts = await getCollection("blog")
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: post,
-	}))
+  const posts = await getCollection("blog")
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }))
 }
 
-// Get the requested post
 type Props = CollectionEntry<"blog">
 const post = Astro.props
-const { title, summary } = post.data
+const { title, summary, date, tags } = post.data
+const { Content } = await post.render()
+
+const allPosts = (await getCollection("blog"))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+const idx = allPosts.findIndex(x => x.slug === post.slug)
+const prev = idx > 0 ? allPosts[idx - 1] : null
+const next = idx < allPosts.length - 1 ? allPosts[idx + 1] : null
 ---
 
-<PageLayout title={title} description={summary}>
-  <TopLayout>
-    <div class="animate">
-      <ArticleTopLayout entry={post}/>
+<PageLayout title={title} description={summary ?? ""} theme="notebook" notebookFile="post.ipynb">
+  <div class="nb-page">
+
+    <!-- Header: back link + title + summary -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-article-header">
+        <a href="/ansh/blog" class="nb-back">← back to blog</a>
+        <h1 class="nb-article-title">{title}</h1>
+        {summary && <p class="nb-article-sub">{summary}</p>}
+      </div>
     </div>
-  </TopLayout>
-  <BottomLayout>
-    <div class="animate">
-      <ArticleBottomLayout entry={post} />
+
+    <!-- Metadata code cell -->
+    <div class="nb-cell">
+      <div class="nb-gutter art-in">In&nbsp;[1]:</div>
+      <div class="nb-code">post.<span class="nb-fn">metadata</span>()</div>
     </div>
-  </BottomLayout>
+    <div class="nb-out-wide">
+      <div class="nb-out-wide-label">
+        <span>Out[1]:</span>
+        <button class="nb-toggle-btn" data-target="meta-out" aria-label="Toggle output">▼</button>
+      </div>
+      <div class="nb-out-wide-body" id="meta-out">
+        <div class="nb-out-lines">
+          <div><span class="nb-cm">date</span>&nbsp;&nbsp;&nbsp;&nbsp;= <span class="nb-str">{formatDate(date)}</span></div>
+          <div><span class="nb-cm">reading</span> = <span class="nb-str">{readingTime(post.body)}</span></div>
+          {tags?.length > 0 && (
+            <div>
+              <span class="nb-cm">tags</span>&nbsp;&nbsp;&nbsp;&nbsp;= [
+              {tags.map((t: string, i: number) => (
+                <span><span class="nb-str">&apos;{t}&apos;</span>{i < tags.length - 1 ? <span class="nb-op">, </span> : ""}</span>
+              ))}]
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <div class="nb-spacer-sm"></div>
+
+    <!-- Article body code cell -->
+    <div class="nb-cell">
+      <div class="nb-gutter art-in">In&nbsp;[2]:</div>
+      <div class="nb-code">post.<span class="nb-fn">read</span>()</div>
+    </div>
+    <div class="nb-out-wide">
+      <div class="nb-out-wide-label">
+        <span>Out[2]:</span>
+        <button class="nb-toggle-btn" data-target="body-out" aria-label="Toggle output">▼</button>
+      </div>
+      <div class="nb-out-wide-body" id="body-out">
+        <div class="nb-article-body">
+          <Content />
+        </div>
+      </div>
+    </div>
+
+    <div class="nb-spacer"></div>
+
+    <!-- Navigation code cell -->
+    <div class="nb-cell">
+      <div class="nb-gutter art-in">In&nbsp;[3]:</div>
+      <div class="nb-code">post.<span class="nb-fn">navigate</span>()</div>
+    </div>
+    <div class="nb-out-wide">
+      <div class="nb-out-wide-label">
+        <span>Out[3]:</span>
+        <button class="nb-toggle-btn" data-target="nav-out" aria-label="Toggle output">▼</button>
+      </div>
+      <div class="nb-out-wide-body" id="nav-out">
+        <div class="nb-nav-row">
+          {prev
+            ? <a href={`/ansh/blog/${prev.slug}`} class="nb-nav-card"><span class="nb-nav-dir">← prev</span><span class="nb-nav-name">{prev.data.title}</span></a>
+            : <div />
+          }
+          {next
+            ? <a href={`/ansh/blog/${next.slug}`} class="nb-nav-card nb-nav-right"><span class="nb-nav-dir">next →</span><span class="nb-nav-name">{next.data.title}</span></a>
+            : <div />
+          }
+        </div>
+      </div>
+    </div>
+
+  </div>
 </PageLayout>
+
+<style>
+  .art-in {
+    color: rgba(63,185,80,0.7);
+    padding-top: 0.85rem;
+  }
+</style>
+
+<script is:inline>
+  // Outer cell output toggles (metadata, body, nav)
+  document.querySelectorAll('.nb-toggle-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var target = document.getElementById(btn.dataset.target)
+      if (!target) return
+      if (target.classList.contains('nb-collapsed')) {
+        target.classList.remove('nb-collapsed')
+        btn.textContent = '▼'
+      } else {
+        target.classList.add('nb-collapsed')
+        btn.textContent = '▶'
+      }
+    })
+  })
+
+  // Inject per-subcell toggle buttons into each course/section h3
+  document.querySelectorAll('.nb-article-body > ul > li > h3').forEach(function(h3) {
+    var li = h3.parentElement
+    var content = li.querySelector('ul')
+    if (!content) return
+
+    var btn = document.createElement('button')
+    btn.className = 'nb-subcell-toggle'
+    btn.textContent = '▼'
+    btn.setAttribute('aria-label', 'Toggle section')
+    btn.addEventListener('click', function(e) {
+      e.preventDefault()
+      e.stopPropagation()
+      if (content.classList.contains('nb-collapsed')) {
+        content.classList.remove('nb-collapsed')
+        btn.textContent = '▼'
+      } else {
+        content.classList.add('nb-collapsed')
+        btn.textContent = '▶'
+      }
+    })
+
+    h3.appendChild(btn)
+  })
+</script>

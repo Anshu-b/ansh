@@ -75,8 +75,8 @@ export const WORK_ENTRIES: WorkEntry[] = [
     dateEnd: "Jun 2025",
     category: "experience",
     bullets: [
-      "Collaborated with CEO Dr. Cindy Lin to spearhead data classification tasks for web-scraped data, processing 1,000+ data points to support creation of ML models to improve sustainability scoring.",
-      "Leveraged domain knowledge in environmental science to designate a rubric with 20+ categories to establish the foundation for fairly scoring company sustainability efforts & guiding the ML model's development.",
+      "Operationalized an ML-based sustainability classification pipeline that converted 10,000+ subjective data points into standardized scores used in internal evaluations and customer-facing dashboards.",
+      "Worked directly with the CEO to translate qualitative sustainability criteria into reproducible data-processing and classification workflows, improving consistency across company analyses.",
     ],
   },
   {
@@ -88,7 +88,8 @@ export const WORK_ENTRIES: WorkEntry[] = [
     dateEnd: "Present",
     category: "experience",
     bullets: [
-      "Collaborating with Professor Kyle Shannon to support 200+ students in DSC 40A and COGS 9 through in-lecture problem solving, while maintaining the course website and developing interactive demos (SQL, Python, ML).",
+      "Supported 800+ students across DSC 40A, DSC 100, COGS 9 (Kyle Shannon), and COGS 108 (Jason Fleischer) through office hours, grading, and technical instruction in Python, SQL, databases, algorithms, and machine learning.", 
+      "Served as software lead by developing and maintaining course websites and migrating automated grading infrastructure to a new platform via custom scripting, increasing grading speed by 50% across large-enrollment courses.",
       '<a href="https://dsc40a.com/" target="_blank" rel="noopener noreferrer">DSC 40A Website →</a>',
       '<a href="https://kshannon-ucsd.github.io/cogs9/" target="_blank" rel="noopener noreferrer">COGS 9 Website →</a>',
     ],
@@ -119,8 +120,19 @@ export const WORK_ENTRIES: WorkEntry[] = [
       "Led a team of high school students working with park-rangers to restore <em>California Nursery Historic Park</em> for its re-opening as part of the Youth Service Corps (YSC).",
     ],
   },
+    {
+    slug: "simplify",
+    company: "Simplify",
+    role: "Campus Ambassador",
+    location: "Remote",
+    dateStart: "Oct 2025",
+    dateEnd: "Jan 2026",
+    category: "experience",
+    bullets: ["Promoted Simplify's AI-powered job application platform to 100+ students at UC San Diego.",
+    ],
+  },
 ]
-
 export const experienceEntries = WORK_ENTRIES.filter(w => w.category === "experience")
 export const researchEntries   = WORK_ENTRIES.filter(w => w.category === "research")
 export const leadershipEntries = WORK_ENTRIES.filter(w => w.category === "leadership")
+export const workEntries = experienceEntries.concat(researchEntries)

@@ -1,35 +1,142 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
-import TopLayout from "@layouts/TopLayout.astro"
-import BottomLayout from "@layouts/BottomLayout.astro"
-import ArticleTopLayout from "@layouts/ArticleTopLayout.astro"
-import ArticleBottomLayout from "@layouts/ArticleBottomLayout.astro"
+import { formatDate } from "@lib/utils"
 
-// Create the static projects pages
 export async function getStaticPaths() {
-	const projects = await getCollection("projects")
-	return projects.map((project) => ({
-		params: { slug: project.slug },
-		props: project,
-	}))
+  const projects = await getCollection("projects")
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: project,
+  }))
 }
 
-// Get the requested project
 type Props = CollectionEntry<"projects">
 const project = Astro.props
-const { title, summary } = project.data
+const { title, summary, date, tags } = project.data
+const demoUrl = (project.data as any).demoUrl ?? null
+const repoUrl = (project.data as any).repoUrl ?? null
+const { Content } = await project.render()
+
+const allProjects = (await getCollection("projects"))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+const idx = allProjects.findIndex(x => x.slug === project.slug)
+const prev = idx > 0 ? allProjects[idx - 1] : null
+const next = idx < allProjects.length - 1 ? allProjects[idx + 1] : null
 ---
 
-<PageLayout title={title} description={summary}>
-  <TopLayout>
-    <div class="animate">
-      <ArticleTopLayout entry={project} />
+<PageLayout title={title} description={summary ?? ""} theme="notebook" notebookFile="project.ipynb">
+  <div class="nb-page">
+
+    <!-- Header: back link + title + summary -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-article-header">
+        <a href="/ansh/projects" class="nb-back">← back to projects</a>
+        <h1 class="nb-article-title">{title}</h1>
+        {summary && <p class="nb-article-sub">{summary}</p>}
+      </div>
     </div>
-  </TopLayout>
-  <BottomLayout>
-    <div class="animate">
-      <ArticleBottomLayout entry={project} />
+
+    <!-- Info code cell -->
+    <div class="nb-cell">
+      <div class="nb-gutter art-in">In&nbsp;[1]:</div>
+      <div class="nb-code">project.<span class="nb-fn">info</span>()</div>
     </div>
-  </BottomLayout>
+    <div class="nb-out-wide">
+      <div class="nb-out-wide-label">
+        <span>Out[1]:</span>
+        <button class="nb-toggle-btn" data-target="info-out" aria-label="Toggle output">▼</button>
+      </div>
+      <div class="nb-out-wide-body" id="info-out">
+        <div class="nb-out-lines">
+          <div><span class="nb-cm">date</span>&nbsp;&nbsp;&nbsp;&nbsp;= <span class="nb-str">{formatDate(date)}</span></div>
+          {tags?.length > 0 && (
+            <div>
+              <span class="nb-cm">tags</span>&nbsp;&nbsp;&nbsp;&nbsp;= [
+              {tags.map((t: string, i: number) => (
+                <span><span class="nb-str">&apos;{t}&apos;</span>{i < tags.length - 1 ? <span class="nb-op">, </span> : ""}</span>
+              ))}]
+            </div>
+          )}
+          {(demoUrl || repoUrl) && (
+            <div class="nb-proj-links">
+              {demoUrl && <a href={demoUrl} target="_blank" rel="noopener noreferrer" class="nb-proj-link">◉ demo →</a>}
+              {repoUrl && <a href={repoUrl} target="_blank" rel="noopener noreferrer" class="nb-proj-link">◈ repo →</a>}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <div class="nb-spacer-sm"></div>
+
+    <!-- Project body code cell -->
+    <div class="nb-cell">
+      <div class="nb-gutter art-in">In&nbsp;[2]:</div>
+      <div class="nb-code">project.<span class="nb-fn">read</span>()</div>
+    </div>
+    <div class="nb-out-wide">
+      <div class="nb-out-wide-label">
+        <span>Out[2]:</span>
+        <button class="nb-toggle-btn" data-target="body-out" aria-label="Toggle output">▼</button>
+      </div>
+      <div class="nb-out-wide-body" id="body-out">
+        <div class="nb-article-body">
+          <Content />
+        </div>
+      </div>
+    </div>
+
+    <div class="nb-spacer"></div>
+
+    <!-- Navigation code cell -->
+    <div class="nb-cell">
+      <div class="nb-gutter art-in">In&nbsp;[3]:</div>
+      <div class="nb-code">project.<span class="nb-fn">navigate</span>()</div>
+    </div>
+    <div class="nb-out-wide">
+      <div class="nb-out-wide-label">
+        <span>Out[3]:</span>
+        <button class="nb-toggle-btn" data-target="nav-out" aria-label="Toggle output">▼</button>
+      </div>
+      <div class="nb-out-wide-body" id="nav-out">
+        <div class="nb-nav-row">
+          {prev
+            ? <a href={`/ansh/projects/${prev.slug}`} class="nb-nav-card"><span class="nb-nav-dir">← prev</span><span class="nb-nav-name">{prev.data.title}</span></a>
+            : <div />
+          }
+          {next
+            ? <a href={`/ansh/projects/${next.slug}`} class="nb-nav-card nb-nav-right"><span class="nb-nav-dir">next →</span><span class="nb-nav-name">{next.data.title}</span></a>
+            : <div />
+          }
+        </div>
+      </div>
+    </div>
+
+  </div>
 </PageLayout>
+
+<style>
+  .art-in {
+    color: rgba(63,185,80,0.7);
+    padding-top: 0.85rem;
+  }
+</style>
+
+<script is:inline>
+  document.querySelectorAll('.nb-toggle-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var target = document.getElementById(btn.dataset.target)
+      if (!target) return
+      if (target.classList.contains('nb-collapsed')) {
+        target.classList.remove('nb-collapsed')
+        btn.textContent = '▼'
+      } else {
+        target.classList.add('nb-collapsed')
+        btn.textContent = '▶'
+      }
+    })
+  })
+</script>

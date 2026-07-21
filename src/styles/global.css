@@ -622,6 +622,14 @@ html[data-theme="notebook"] footer .border-t {
 .nb-out-text .nb-out-green { color: #3fb950; }
 .nb-out-text .nb-out-blue  { color: #79c0ff; }
 
+/* --- Output: stacked div lines (metadata in detail pages) --- */
+.nb-out-lines {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: #e6edf3;
+  line-height: 1.85;
+}
+
 /* --- Stderr/print output --- */
 .nb-out-stream {
   font-family: 'JetBrains Mono', monospace;
@@ -703,7 +711,8 @@ html[data-theme="notebook"] footer .border-t {
 }
 
 /* Collapsed output state */
-.nb-output.nb-collapsed {
+.nb-output.nb-collapsed,
+.nb-out-wide-body.nb-collapsed {
   display: none !important;
 }
 
@@ -762,4 +771,335 @@ html[data-theme="notebook"] #header .brand-link:hover {
     width: 50px;
     font-size: 0.6rem;
   }
+}
+
+/* ============================================================
+   ARTICLE PROSE (blog post / project detail body)
+   ============================================================ */
+
+.nb-article-body {
+  padding-left: 0.75rem;
+  color: #c9d1d9;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  /* max-width: 72ch; */
+}
+
+.nb-article-body h1,
+.nb-article-body h2,
+.nb-article-body h3,
+.nb-article-body h4,
+.nb-article-body h5 {
+  color: #e6edf3;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+}
+.nb-article-body h1 { font-size: 1.5rem; margin-top: 0; }
+.nb-article-body h2 {
+  font-size: 1.2rem;
+  border-bottom: 1px solid #21262d;
+  padding-bottom: 0.3rem;
+}
+.nb-article-body h3 { font-size: 1.05rem; }
+.nb-article-body h4 { font-size: 0.95rem; color: #a5d6ff; }
+
+.nb-article-body p  { margin: 0.85rem 0; }
+.nb-article-body a  { color: #58a6ff; text-decoration: underline; text-underline-offset: 2px; }
+.nb-article-body a:hover { color: #79c0ff; }
+
+.nb-article-body ul,
+.nb-article-body ol  { padding-left: 1.5rem; margin: 0.75rem 0; }
+.nb-article-body li  { margin: 0.3rem 0; }
+
+.nb-article-body code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82em;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 3px;
+  padding: 0.1em 0.4em;
+  color: #79c0ff;
+}
+.nb-article-body pre {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin: 1.25rem 0;
+}
+.nb-article-body pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #e6edf3;
+  font-size: 0.84rem;
+}
+
+.nb-article-body blockquote {
+  border-left: 3px solid rgba(63,185,80,0.4);
+  margin: 1.25rem 0;
+  padding: 0.5rem 1rem;
+  color: #8b949e;
+  background: rgba(63,185,80,0.04);
+  border-radius: 0 4px 4px 0;
+}
+.nb-article-body blockquote p { margin: 0; }
+
+.nb-article-body hr {
+  border: none;
+  border-top: 1px solid #21262d;
+  margin: 2rem 0;
+}
+
+.nb-article-body img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin: 1.25rem 0;
+  border: 1px solid #21262d;
+  display: block;
+}
+
+.nb-article-body strong { color: #e6edf3; font-weight: 600; }
+
+.nb-article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+}
+.nb-article-body th {
+  background: #161b22;
+  border: 1px solid #30363d;
+  padding: 0.5rem 0.75rem;
+  color: #e6edf3;
+  text-align: left;
+  font-weight: 600;
+}
+.nb-article-body td {
+  border: 1px solid #21262d;
+  padding: 0.45rem 0.75rem;
+  color: #c9d1d9;
+}
+.nb-article-body tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* ── Subcells: top-level list items containing an h3 become notebook cells ── */
+
+/* Outer list: becomes a vertical stack of cells */
+.nb-article-body > ul:has(> li > h3) {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  counter-reset: nb-sc;
+}
+
+/* Each course/section cell */
+.nb-article-body > ul:has(> li > h3) > li {
+  counter-increment: nb-sc;
+  background: #161b22;
+  border: 1px solid #21262d;
+  border-left: 3px solid rgba(63, 185, 80, 0.22);
+  border-radius: 0 4px 4px 0;
+  overflow: hidden;
+  transition: border-left-color 0.2s;
+}
+
+.nb-article-body > ul:has(> li > h3) > li:hover {
+  border-left-color: rgba(63, 185, 80, 0.55);
+}
+
+/* Cell header row (the h3 line) */
+.nb-article-body > ul:has(> li > h3) > li > h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #d2a8ff;
+  background: #0d1117;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  border-bottom: 1px solid #21262d;
+  line-height: 1.5;
+}
+
+/* Auto-numbered In[N]: label */
+.nb-article-body > ul:has(> li > h3) > li > h3::before {
+  content: "In [" counter(nb-sc) "]:";
+  color: rgba(63, 185, 80, 0.55);
+  font-size: 0.68rem;
+  flex-shrink: 0;
+}
+
+/* Cell output: the nested ul (Professor, Grade, Thoughts…) */
+.nb-article-body > ul:has(> li > h3) > li > ul {
+  list-style: none;
+  padding: 0.6rem 1rem 0.65rem 1rem;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  border-left: 3px solid #21262d;
+  margin-left: 0;
+}
+
+.nb-article-body > ul:has(> li > h3) > li > ul > li {
+  padding: 0;
+  margin: 0.15rem 0;
+  color: #c9d1d9;
+}
+
+/* "My Thoughts:" sub-list */
+.nb-article-body > ul:has(> li > h3) > li > ul > li > ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin: 0.35rem 0 0.1rem;
+}
+
+.nb-article-body > ul:has(> li > h3) > li > ul > li > ul > li {
+  margin: 0.25rem 0;
+  color: #8b949e;
+  font-size: 0.855rem;
+  line-height: 1.7;
+}
+
+/* Deeper nesting (sub-bullets inside My Thoughts) */
+.nb-article-body > ul:has(> li > h3) > li > ul > li > ul > li > ul {
+  list-style: circle;
+  padding-left: 1.1rem;
+  margin: 0.2rem 0;
+}
+
+.nb-article-body > ul:has(> li > h3) > li > ul > li > ul > li > ul > li {
+  color: #6e7681;
+  font-size: 0.84rem;
+}
+
+/* Collapsed subcell content */
+.nb-article-body > ul:has(> li > h3) > li > ul.nb-collapsed {
+  display: none;
+}
+
+/* Cell header: space between label+title and toggle button */
+.nb-article-body > ul:has(> li > h3) > li > h3 {
+  justify-content: space-between;
+}
+
+/* Subcell toggle button (inside h3) */
+.nb-subcell-toggle {
+  background: none;
+  border: 1px solid rgba(63, 185, 80, 0.2);
+  border-radius: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  color: rgba(63, 185, 80, 0.4);
+  cursor: pointer;
+  padding: 0.08rem 0.28rem;
+  line-height: 1;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.nb-subcell-toggle:hover {
+  background: rgba(63, 185, 80, 0.08);
+  border-color: rgba(63, 185, 80, 0.55);
+  color: #3fb950;
+}
+
+/* Article header (back link + title + summary) */
+.nb-article-header {
+  padding: 0.3rem 0 0.3rem 0.75rem;
+}
+
+.nb-back {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: rgba(63,185,80,0.6);
+  text-decoration: none;
+  margin-bottom: 1rem;
+  transition: color 0.15s;
+}
+.nb-back:hover { color: #3fb950; }
+
+.nb-article-title {
+  font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  color: #e6edf3;
+  line-height: 1.25;
+  margin: 0 0 0.45rem;
+}
+
+.nb-article-sub {
+  color: #8b949e;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Metadata output row */
+.nb-meta-row {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: #e6edf3;
+  line-height: 1.85;
+  display: block;
+}
+
+/* Proj links inside metadata output */
+.nb-proj-links {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 0.35rem;
+}
+.nb-proj-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: #3fb950;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.nb-proj-link:hover { color: #79c0ff; }
+
+/* Prev / next nav */
+.nb-nav-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+.nb-nav-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.75rem 1rem;
+  background: #161b22;
+  border: 1px solid rgba(63,185,80,0.18);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.nb-nav-card:hover {
+  border-color: rgba(63,185,80,0.5);
+  box-shadow: 0 0 10px rgba(63,185,80,0.08);
+}
+.nb-nav-right { text-align: right; }
+.nb-nav-dir {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: rgba(63,185,80,0.6);
+}
+.nb-nav-name {
+  font-size: 0.85rem;
+  color: #e6edf3;
+  line-height: 1.4;
+}
+
+@media (max-width: 500px) {
+  .nb-nav-row { grid-template-columns: 1fr; }
 }

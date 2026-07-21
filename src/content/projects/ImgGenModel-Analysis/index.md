@@ -2,7 +2,7 @@
 title: "ImgGenModel-Analysis"
 summary: "Comparative Analysis of Stable Diffusion and Conditional DC-GANs"
 date: "June 12, 2025"
-draft: false
+draft: true
 tags:
 - Generative AI
 - Machine Learning

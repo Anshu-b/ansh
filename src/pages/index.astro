@@ -1,13 +1,20 @@
 ---
+import { getCollection } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
 import { SITE, SOCIALS } from "@consts"
+import { PROFILE, BIO, ORGANIZATIONS, COURSEWORK } from "@data/about"
+import { workEntries } from "@data/work"
+
+const projects = (await getCollection("projects"))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 ---
 
 <PageLayout title="About" description={SITE.DESCRIPTION} theme="notebook" notebookFile="about.ipynb">
 
   <div class="nb-page">
 
-    <!-- Markdown cell: hero header -->
+    <!-- Markdown cell: hero -->
     <div class="nb-cell">
       <div class="nb-gutter"></div>
       <div class="nb-md">
@@ -18,7 +25,7 @@ import { SITE, SOCIALS } from "@consts"
 
     <div class="nb-spacer-sm"></div>
 
-    <!-- Code cell 1: initialize -->
+    <!-- ── CELL 1: about() ────────────────────────────────────── -->
     <div class="nb-cell nb-runnable" data-cell-id="1" id="cell-1">
       <div class="nb-gutter" id="gutter-1">In&nbsp;[&nbsp;]:</div>
       <div class="nb-code">
@@ -29,7 +36,6 @@ import { SITE, SOCIALS } from "@consts"
       </div>
     </div>
 
-    <!-- Output 1: profile -->
     <div class="nb-cell" id="output-1">
       <div class="nb-gutter nb-gutter-out" id="out-gutter-1">
         <span id="out-prompt-1">Out[&nbsp;]:</span>
@@ -37,32 +43,28 @@ import { SITE, SOCIALS } from "@consts"
       </div>
       <div class="nb-output nb-hidden" id="out-content-1">
         <div class="nb-out-dict">
-          <span class="nb-out-punc">{</span><br/>
-          &nbsp;&nbsp;<span class="nb-out-dict-key">'name'</span><span class="nb-out-dict-punc">:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nb-out-dict-str">'Ansh Bhatnagar'</span><span class="nb-out-dict-punc">,</span><br/>
-          &nbsp;&nbsp;<span class="nb-out-dict-key">'role'</span><span class="nb-out-dict-punc">:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nb-out-dict-str">'SDE Intern — Amazon Web Services'</span><span class="nb-out-dict-punc">,</span><br/>
-          &nbsp;&nbsp;<span class="nb-out-dict-key">'org'</span><span class="nb-out-dict-punc">:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nb-out-dict-str">'President @ DS3 · Founder @ AWS Cloud Club · GDG UCSD'</span><span class="nb-out-dict-punc">,</span><br/>
-          &nbsp;&nbsp;<span class="nb-out-dict-key">'hackathon'</span><span class="nb-out-dict-punc">:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nb-out-dict-str">'Director @ DataHacks 2026 (~$100k budget, 400+ students)'</span><span class="nb-out-dict-punc">,</span><br/>
-          &nbsp;&nbsp;<span class="nb-out-dict-key">'studying'</span><span class="nb-out-dict-punc">:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nb-out-dict-str">'Data Science, Cognitive Science, Math-CS @ UCSD'</span><span class="nb-out-dict-punc">,</span><br/>
-          &nbsp;&nbsp;<span class="nb-out-dict-key">'building'</span><span class="nb-out-dict-punc">:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nb-out-dict-str">'things that hold up in production'</span><br/>
-          <span class="nb-out-punc">}</span>
+          <span class="nb-out-punc">{'{'}</span>
+          {PROFILE.map((item) => (
+            <div class="about-dict-row">
+              <span class="nb-out-dict-key">&nbsp;&nbsp;'{item.key}'</span>
+              <span class="nb-out-dict-punc">:</span>
+              <span class="nb-out-dict-str">&nbsp;'{item.value}',</span>
+            </div>
+          ))}
+          <span class="nb-out-punc">{'}'}</span>
         </div>
-        <div class="nb-out-stream about-bio">
-          <br/>
-          I like to move fast, take ownership, and build things that actually work — even if that means breaking a few things along the way.
-          I'm not trying to fit into one lane: I want to understand how systems work end-to-end, from the infrastructure to the model to the real-world impact.
-        </div>
+        <p class="about-bio">{BIO}</p>
       </div>
     </div>
 
     <div class="nb-spacer"></div>
 
-    <!-- Markdown cell: organizations header -->
+    <!-- ── CELL 2: organizations() ───────────────────────────── -->
     <div class="nb-cell">
       <div class="nb-gutter"></div>
       <div class="nb-md"><h2>§ Organizations</h2></div>
     </div>
 
-    <!-- Code cell 2: organizations -->
     <div class="nb-cell nb-runnable" data-cell-id="2" id="cell-2">
       <div class="nb-gutter" id="gutter-2">In&nbsp;[&nbsp;]:</div>
       <div class="nb-code">
@@ -71,7 +73,6 @@ import { SITE, SOCIALS } from "@consts"
       </div>
     </div>
 
-    <!-- Output 2: org list -->
     <div class="nb-cell" id="output-2">
       <div class="nb-gutter nb-gutter-out" id="out-gutter-2">
         <span id="out-prompt-2">Out[&nbsp;]:</span>
@@ -80,33 +81,16 @@ import { SITE, SOCIALS } from "@consts"
       <div class="nb-output nb-hidden" id="out-content-2">
         <table class="nb-out-table">
           <thead>
-            <tr>
-              <th>organization</th>
-              <th>role</th>
-              <th>description</th>
-            </tr>
+            <tr><th>organization</th><th>role</th><th>description</th></tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Data Science Student Society (DS3)</td>
-              <td>President</td>
-              <td>Scaled to 600+ members. Consulting, real-world data science, connecting students with research and industry.</td>
-            </tr>
-            <tr>
-              <td>AWS Cloud Club @ UCSD</td>
-              <td>Founder & Lead</td>
-              <td>Founded and lead an industry-backed student org focused on cloud computing education.</td>
-            </tr>
-            <tr>
-              <td>Google Developer Group (GDG) on Campus</td>
-              <td>Founder & Lead</td>
-              <td>Built UCSD's GDG chapter, bridging students with Google's developer ecosystem.</td>
-            </tr>
-            <tr>
-              <td>DataHacks 2026</td>
-              <td>Director</td>
-              <td>400+ students, ~$100k budget. Judges from Apple, Google, NVIDIA, YCombinator, Microsoft.</td>
-            </tr>
+            {ORGANIZATIONS.map((org) => (
+              <tr>
+                <td>{org.name}</td>
+                <td>{org.role}</td>
+                <td class="about-dim">{org.description}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -114,79 +98,152 @@ import { SITE, SOCIALS } from "@consts"
 
     <div class="nb-spacer"></div>
 
-    <!-- Markdown cell: experience header -->
+    <!-- ── CELL 3: deployments() ────────────────────────────── -->
     <div class="nb-cell">
       <div class="nb-gutter"></div>
-      <div class="nb-md"><h2>§ Experience &amp; Learning</h2></div>
+      <div class="nb-md"><h2>§ Experience</h2></div>
     </div>
 
-    <!-- Code cell 3: deployments -->
     <div class="nb-cell nb-runnable" data-cell-id="3" id="cell-3">
       <div class="nb-gutter" id="gutter-3">In&nbsp;[&nbsp;]:</div>
       <div class="nb-code">
         <button class="nb-run-btn" aria-label="Run cell">▶</button>
-        ansh.<span class="nb-fn">deployments</span>()<br/>
-        ansh.<span class="nb-fn">coursework</span>()
+        <span class="nb-cm"># {workEntries.length} roles</span><br/>
+        ansh.<span class="nb-fn">experience</span>()
       </div>
     </div>
 
-    <!-- Output 3: experience + coursework -->
     <div class="nb-cell" id="output-3">
       <div class="nb-gutter nb-gutter-out" id="out-gutter-3">
         <span id="out-prompt-3">Out[&nbsp;]:</span>
         <button class="nb-toggle-btn" data-target="out-content-3" aria-label="Toggle output">▶</button>
       </div>
       <div class="nb-output nb-hidden" id="out-content-3">
-        <div class="nb-out-text"><span class="nb-out-hl">Amazon Web Services</span>&nbsp;&nbsp;&nbsp;<span class="nb-out-green">SDE Intern</span>
-<span class="nb-out-sep">────────────────────────────────────────────────────────────────</span>
-Built an anomaly detection system for EC2 deployments at scale. Designed to operate in
-production, integrate with real systems, and support engineers in high-stakes situations.
-That experience pushed me to think less about "models" and more about systems that hold up.
-
-<span class="nb-out-hl">Coursework that changed how I think:</span>
-<span class="nb-out-blue">CSE 29</span>    Systems Programming — memory, processes, how software actually runs
-<span class="nb-out-blue">DSC 120</span>   Signal Processing — transforms, filtering, structure from raw signals
-<span class="nb-out-blue">DSC 190</span>   IoT &amp; Sensors — end-to-end systems, streaming pipelines, hardware-software
-<span class="nb-out-blue">DSC 80</span>    Pandas, ML practice (140A-B: models to deployment)
-<span class="nb-out-blue">COGS 181</span>  Deep Learning — neural nets, architectures, training
-<span class="nb-out-blue">COGS 150</span>  Large Language Models — transformers, prompting, real applications
-<span class="nb-out-blue">MATH 173A</span> Optimization — gradients, convexity, ML as optimization
-<span class="nb-out-blue">MGT 175</span>   Supply Chain &amp; Operations — scale, tradeoffs, uncertainty</div>
-        </div>
+        <table class="nb-out-table">
+          <thead>
+            <tr><th>company</th><th>role</th><th>location</th></tr>
+          </thead>
+          <tbody>
+            {workEntries.map((e) => (
+              <tr>
+                <td>{e.company}</td>
+                <td>{e.role}</td>
+                <td class="about-dim">{e.location}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
 
     <div class="nb-spacer"></div>
 
-    <!-- Markdown cell: contact header -->
+    <!-- ── CELL 4: projects() ───────────────────────────────── -->
     <div class="nb-cell">
       <div class="nb-gutter"></div>
-      <div class="nb-md"><h2>§ Contact</h2></div>
+      <div class="nb-md"><h2>§ Projects</h2></div>
     </div>
 
-    <!-- Code cell 4: contact -->
     <div class="nb-cell nb-runnable" data-cell-id="4" id="cell-4">
       <div class="nb-gutter" id="gutter-4">In&nbsp;[&nbsp;]:</div>
       <div class="nb-code">
         <button class="nb-run-btn" aria-label="Run cell">▶</button>
-        ansh.<span class="nb-fn">contact</span>()
+        <span class="nb-cm"># {projects.length} published</span><br/>
+        ansh.<span class="nb-fn">projects</span>()
       </div>
     </div>
 
-    <!-- Output 4: socials + nav -->
     <div class="nb-cell" id="output-4">
       <div class="nb-gutter nb-gutter-out" id="out-gutter-4">
         <span id="out-prompt-4">Out[&nbsp;]:</span>
         <button class="nb-toggle-btn" data-target="out-content-4" aria-label="Toggle output">▶</button>
       </div>
       <div class="nb-output nb-hidden" id="out-content-4">
+        <table class="nb-out-table">
+          <thead>
+            <tr><th>title</th><th>summary</th></tr>
+          </thead>
+          <tbody>
+            {projects.map((p) => (
+              <tr>
+                <td>
+                  {(p.data.demoUrl || p.data.repoUrl) ? (
+                    <a href={p.data.demoUrl || p.data.repoUrl} target="_blank" rel="noopener noreferrer" class="about-proj-link">
+                      {p.data.title}
+                    </a>
+                  ) : p.data.title}
+                </td>
+                <td class="about-dim">{p.data.summary}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="nb-spacer"></div>
+
+    <!-- ── CELL 5: coursework() ──────────────────────────────── -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-md"><h2>§ Coursework</h2></div>
+    </div>
+
+    <div class="nb-cell nb-runnable" data-cell-id="5" id="cell-5">
+      <div class="nb-gutter" id="gutter-5">In&nbsp;[&nbsp;]:</div>
+      <div class="nb-code">
+        <button class="nb-run-btn" aria-label="Run cell">▶</button>
+        ansh.<span class="nb-fn">coursework</span>()
+      </div>
+    </div>
+
+    <div class="nb-cell" id="output-5">
+      <div class="nb-gutter nb-gutter-out" id="out-gutter-5">
+        <span id="out-prompt-5">Out[&nbsp;]:</span>
+        <button class="nb-toggle-btn" data-target="out-content-5" aria-label="Toggle output">▶</button>
+      </div>
+      <div class="nb-output nb-hidden" id="out-content-5">
+        <div class="about-coursework">
+          Coursework that changed how I think:
+          {COURSEWORK.map((c) => (
+            <div class="about-course-row">
+              <span class="nb-out-blue about-course-code">{c.code}</span>
+              <span class="about-course-desc">{c.description}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="nb-spacer"></div>
+
+    <!-- ── CELL 6: contact() ─────────────────────────────────── -->
+    <div class="nb-cell">
+      <div class="nb-gutter"></div>
+      <div class="nb-md"><h2>§ Contact</h2></div>
+    </div>
+
+    <div class="nb-cell nb-runnable" data-cell-id="6" id="cell-6">
+      <div class="nb-gutter" id="gutter-6">In&nbsp;[&nbsp;]:</div>
+      <div class="nb-code">
+        <button class="nb-run-btn" aria-label="Run cell">▶</button>
+        ansh.<span class="nb-fn">contact</span>()
+      </div>
+    </div>
+
+    <div class="nb-cell" id="output-6">
+      <div class="nb-gutter nb-gutter-out" id="out-gutter-6">
+        <span id="out-prompt-6">Out[&nbsp;]:</span>
+        <button class="nb-toggle-btn" data-target="out-content-6" aria-label="Toggle output">▶</button>
+      </div>
+      <div class="nb-output nb-hidden" id="out-content-6">
         <div class="nb-out-dict">
-          <span class="nb-out-punc">{'{'}</span><br/>
+          <span class="nb-out-punc">{'{'}</span>
           {SOCIALS.map((social) => (
             <div>
               &nbsp;&nbsp;<a href={social.HREF} target="_blank" rel="noopener noreferrer" class="nb-contact-entry">
                 <span class="nb-out-dict-key">'{social.NAME}'</span>
-                <span class="nb-out-dict-punc">:&nbsp;&nbsp;</span>
+                <span class="nb-out-dict-punc">:&nbsp;</span>
                 <span class="nb-out-dict-str">'{social.TEXT}'</span>
               </a>
             </div>
@@ -208,18 +265,54 @@ That experience pushed me to think less about "models" and more about systems th
 </PageLayout>
 
 <style>
-  /* About output extras */
   .nb-out-punc { color: #8b949e; }
 
+  /* Profile dict rows: key aligned in a fixed-width column */
+  .about-dict-row {
+    display: grid;
+    grid-template-columns: 13ch max-content 1fr;
+    line-height: 1.9;
+  }
+
   .about-bio {
-    margin-top: 0.5rem;
-    color: rgba(201, 209, 217, 0.7);
+    margin-top: 0.75rem;
     font-family: 'Atkinson', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     line-height: 1.75;
-    font-family: inherit;
+    color: rgba(201, 209, 217, 0.7);
     white-space: normal;
   }
+
+  /* Muted description column in orgs table */
+  .about-dim {
+    color: rgba(230, 237, 243, 0.6) !important;
+    white-space: normal !important;
+    font-size: 0.74rem;
+  }
+
+  /* Coursework */
+  .about-coursework {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.79rem;
+  }
+  .about-course-heading {
+    margin-bottom: 0.4rem;
+  }
+  .about-course-row {
+    display: grid;
+    grid-template-columns: 10ch 1fr;
+    gap: 0.5rem;
+    line-height: 1.85;
+  }
+  .about-course-code { color: #79c0ff; }
+  .about-course-desc { color: rgba(230, 237, 243, 0.7); }
+
+  .about-proj-link {
+    color: #79c0ff;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .about-proj-link:hover { color: #a5d6ff; }
 
   .nb-contact-entry {
     display: inline-flex;
@@ -227,7 +320,6 @@ That experience pushed me to think less about "models" and more about systems th
     text-decoration: none;
     transition: opacity 0.15s ease;
   }
-
   .nb-contact-entry:hover { opacity: 0.75; }
 
   .about-nav-links {
@@ -248,7 +340,6 @@ That experience pushed me to think less about "models" and more about systems th
     text-decoration: none;
     transition: all 0.15s ease;
   }
-
   .about-nav-btn:hover {
     background: rgba(63, 185, 80, 0.15);
     border-color: rgba(63, 185, 80, 0.7);
@@ -259,7 +350,6 @@ That experience pushed me to think less about "models" and more about systems th
     color: #8b949e;
     border-color: rgba(139, 148, 158, 0.3);
   }
-
   .about-nav-btn-outline:hover {
     background: rgba(139, 148, 158, 0.06);
     border-color: rgba(139, 148, 158, 0.5);
@@ -272,39 +362,37 @@ That experience pushed me to think less about "models" and more about systems th
   var execCount = 0;
 
   function runCell(cellId) {
-    var cell = document.getElementById('cell-' + cellId);
-    var gutter = document.getElementById('gutter-' + cellId);
-    var outPrompt = document.getElementById('out-prompt-' + cellId);
+    var cell       = document.getElementById('cell-' + cellId);
+    var gutter     = document.getElementById('gutter-' + cellId);
+    var outPrompt  = document.getElementById('out-prompt-' + cellId);
     var outContent = document.getElementById('out-content-' + cellId);
-    var outGutter = document.getElementById('out-gutter-' + cellId);
-    var toggleBtn = outGutter ? outGutter.querySelector('.nb-toggle-btn') : null;
-    var kernelDot = document.getElementById('nb-kernel-dot');
+    var outGutter  = document.getElementById('out-gutter-' + cellId);
+    var toggleBtn  = outGutter ? outGutter.querySelector('.nb-toggle-btn') : null;
+    var kernelDot    = document.getElementById('nb-kernel-dot');
     var kernelStatus = document.getElementById('nb-kernel-status');
 
     if (!outContent) return Promise.resolve();
 
     cell && cell.classList.add('nb-running');
     if (gutter) gutter.innerHTML = 'In\u00A0[*]:';
-    kernelDot && kernelDot.classList.add('busy');
+    kernelDot    && kernelDot.classList.add('busy');
     if (kernelStatus) kernelStatus.textContent = 'Python 3 | busy';
 
     return new Promise(function (resolve) {
       setTimeout(function () {
         execCount++;
-        if (gutter) gutter.innerHTML = 'In\u00A0[' + execCount + ']:';
+        if (gutter)    gutter.innerHTML   = 'In\u00A0[' + execCount + ']:';
         if (outPrompt) outPrompt.innerHTML = 'Out[' + execCount + ']:';
 
-        outContent.classList.remove('nb-hidden');
-        outContent.classList.remove('nb-collapsed');
+        outContent.classList.remove('nb-hidden', 'nb-collapsed');
         outContent.classList.add('nb-revealed');
         outContent.style.animation = 'none';
-        outContent.offsetHeight; // reflow
+        outContent.offsetHeight;
         outContent.style.animation = '';
 
         if (toggleBtn) toggleBtn.textContent = '▼';
-
         cell && cell.classList.remove('nb-running');
-        kernelDot && kernelDot.classList.remove('busy');
+        kernelDot    && kernelDot.classList.remove('busy');
         if (kernelStatus) kernelStatus.textContent = 'Python 3 | idle';
 
         resolve();
@@ -315,20 +403,16 @@ That experience pushed me to think less about "models" and more about systems th
   function resetAll() {
     execCount = 0;
     document.querySelectorAll('.nb-output.nb-revealed').forEach(function (el) {
-      el.classList.add('nb-hidden');
       el.classList.remove('nb-revealed');
+      el.classList.add('nb-hidden');
     });
-    // Reset prompts (spans inside out-gutter, not the whole gutter)
-    for (var i = 1; i <= 4; i++) {
+    for (var i = 1; i <= 6; i++) {
       var p = document.getElementById('out-prompt-' + i);
       if (p) p.innerHTML = 'Out[\u00A0]:';
+      var g = document.getElementById('gutter-' + i);
+      if (g) g.innerHTML = 'In\u00A0[\u00A0]:';
     }
-    document.querySelectorAll('.nb-runnable .nb-gutter').forEach(function (el) {
-      el.innerHTML = 'In\u00A0[\u00A0]:';
-    });
-    document.querySelectorAll('.nb-toggle-btn').forEach(function (btn) {
-      btn.textContent = '▶';
-    });
+    document.querySelectorAll('.nb-toggle-btn').forEach(function (btn) { btn.textContent = '▶'; });
   }
 
   async function runAll() {
@@ -340,7 +424,6 @@ That experience pushed me to think less about "models" and more about systems th
     }
   }
 
-  // Individual run buttons
   document.querySelectorAll('.nb-run-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var cell = btn.closest('.nb-runnable');
@@ -348,15 +431,13 @@ That experience pushed me to think less about "models" and more about systems th
     });
   });
 
-  // Toggle (hide/show) buttons
   document.querySelectorAll('.nb-toggle-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var target = document.getElementById(btn.dataset.target);
       if (!target) return;
       var hidden = target.classList.contains('nb-hidden') || target.classList.contains('nb-collapsed');
       if (hidden) {
-        target.classList.remove('nb-hidden');
-        target.classList.remove('nb-collapsed');
+        target.classList.remove('nb-hidden', 'nb-collapsed');
         target.classList.add('nb-revealed');
         btn.textContent = '▼';
       } else {
@@ -367,11 +448,9 @@ That experience pushed me to think less about "models" and more about systems th
     });
   });
 
-  // Run all button (in toolbar)
   var runAllBtn = document.getElementById('nb-run-all');
   if (runAllBtn) runAllBtn.addEventListener('click', runAll);
 
-  // Auto-run on load
   setTimeout(runAll, 700);
 })();
 </script>
